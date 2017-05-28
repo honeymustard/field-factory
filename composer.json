@@ -1,6 +1,7 @@
 {
     "name": "honeymustard/acf-factory",
     "description": "A facade library for Advanced Custom Fields",
+    "homepage": "https://github.com/honeymustard/acf-factory",
     "type": "library",
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0",
