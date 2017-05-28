@@ -23,7 +23,8 @@
     "scripts": {
         "test": [
             "phpcs --config-set report_width 100",
-            "phpcs --standard=PSR2 --colors ./src"
+            "phpcs --standard=PSR2 --colors ./src",
+            "phpunit tests --bootstrap ./vendor/autoload.php"
          ]
     }
 }
