@@ -1,0 +1,28 @@
+{
+    "name": "honeymustard/acf-factory",
+    "description": "A facade library for Advanced Custom Fields",
+    "type": "library",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpunit/phpunit": "^6.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrian Solumsmo",
+            "email": "adrian.solumsmo@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Honeymustard\\AcfFactory\\": "src"
+        }
+    },
+    "scripts": {
+        "test": [
+            "phpcs --config-set report_width 100",
+            "phpcs --standard=PSR2 --colors ./src"
+         ]
+    }
+}
