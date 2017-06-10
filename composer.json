@@ -1,7 +1,7 @@
 {
-    "name": "honeymustard/acf-factory",
+    "name": "honeymustard/field-factory",
     "description": "A facade library for Advanced Custom Fields",
-    "homepage": "https://github.com/honeymustard/acf-factory",
+    "homepage": "https://github.com/honeymustard/field-factory",
     "type": "library",
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.0",
@@ -17,7 +17,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Honeymustard\\AcfFactory\\": "src"
+            "Honeymustard\\FieldFactory\\": "src"
         }
     },
     "scripts": {
