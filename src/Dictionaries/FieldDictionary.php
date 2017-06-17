@@ -5,7 +5,7 @@ namespace Honeymustard\FieldFactory\Dictionaries;
 /**
  * Dictionary for translations between terms.
  */
-class FieldDictionary implements AbstractDictionary
+class FieldDictionary extends AbstractDictionary
 {
     public function getMap()
     {
