@@ -97,7 +97,7 @@ abstract class AbstractField
     protected function verify($args)
     {
         Utils\Maps::require('key', $args);
-        Utils\Maps::require('name', $args)
+        Utils\Maps::require('name', $args);
 
         return $args;
     }
