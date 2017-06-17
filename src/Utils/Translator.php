@@ -66,6 +66,6 @@ class Translator
      */
     public function getDictionary()
     {
-        $this->dictionary;
+        return $this->dictionary;
     }
 }
