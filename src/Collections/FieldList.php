@@ -40,7 +40,7 @@ class FieldList extends AbstractList
      *
      * @return AbstractField
      */
-    public function getFieldAt($index)
+    public function indexOf($index)
     {
         if (isset($this->fields[$index])) {
             return $this->fields[$index];
