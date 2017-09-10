@@ -56,10 +56,10 @@ abstract class AbstractField
      */
     protected function parse($args)
     {
-        $a = $this->getFieldArgs();
-        $b = $this->getDefaultArgs();
+        $a = $this->getDefaultArgs();
+        $b = $this->getFieldArgs();
 
-        return $this->verify($this->merge($args, $this->merge($a, $b)));
+        return $this->verify($this->merge($a, $this->merge($b, $args)));
     }
 
     /**
