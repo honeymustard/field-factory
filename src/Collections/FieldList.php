@@ -40,6 +40,6 @@ class FieldList extends AbstractList
      */
     public function getFields()
     {
-        return $this->getList();
+        return $this->toArray();
     }
 }
