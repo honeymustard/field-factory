@@ -35,11 +35,12 @@ class Factory
      *
      * @param AbstractField $field A valid field type.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function append(Fields\AbstractField $field)
     {
-        return $this->getList()->append($field);
+        $this->getList()->append($field);
+        return $this;
     }
 
     /**
@@ -55,7 +56,7 @@ class Factory
     /**
      * Generate a new tab field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function tab($args)
     {
@@ -65,7 +66,7 @@ class Factory
     /**
      * Generate a new message field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function message($args)
     {
@@ -75,7 +76,7 @@ class Factory
     /**
      * Generate a new repeater field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function repeater($args)
     {
@@ -85,7 +86,7 @@ class Factory
     /**
      * Generate a new image field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function image($args)
     {
@@ -95,7 +96,7 @@ class Factory
     /**
      * Generate a new text field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function text($args)
     {
@@ -105,7 +106,7 @@ class Factory
     /**
      * Generate a new textarea field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function textarea($args)
     {
@@ -115,7 +116,7 @@ class Factory
     /**
      * Generate a new wysiwyg field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function wysiwyg($args)
     {
@@ -125,7 +126,7 @@ class Factory
     /**
      * Generate a new radio buttons field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function radio($args)
     {
@@ -135,7 +136,7 @@ class Factory
     /**
      * Generate a new url field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function url($args)
     {
@@ -145,7 +146,7 @@ class Factory
     /**
      * Generate a new post object field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function postObject($args)
     {
@@ -155,7 +156,7 @@ class Factory
     /**
      * Generate a new select field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function select($args)
     {
@@ -165,7 +166,7 @@ class Factory
     /**
      * Generate a new checkbox field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function checkbox($args)
     {
@@ -175,7 +176,7 @@ class Factory
     /**
      * Generate a new e-mail field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function email($args)
     {
@@ -185,7 +186,7 @@ class Factory
     /**
      * Generate a new flexible content field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function flexibleContent($args)
     {
@@ -195,7 +196,7 @@ class Factory
     /**
      * Generate a new relationship field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function relationship($args)
     {
@@ -205,7 +206,7 @@ class Factory
     /**
      * Generate a new file field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function file($args)
     {
@@ -215,7 +216,7 @@ class Factory
     /**
      * Generate a new oembed field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function oembed($args)
     {
@@ -225,7 +226,7 @@ class Factory
     /**
      * Generate a new boolean field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function trueFalse($args)
     {
@@ -235,7 +236,7 @@ class Factory
     /**
      * Generate a new color picker field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function colorPicker($args)
     {
@@ -245,7 +246,7 @@ class Factory
     /**
      * Generate a new date & time picker field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function dateTimePicker($args)
     {
@@ -255,7 +256,7 @@ class Factory
     /**
      * Generate a new user selection field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function user($args)
     {
@@ -265,7 +266,7 @@ class Factory
     /**
      * Generate a new number field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function number($args)
     {
@@ -275,7 +276,7 @@ class Factory
     /**
      * Generate a new google map field.
      *
-     * @return AbstractField
+     * @return Factory
      */
     public function googleMap($args)
     {
