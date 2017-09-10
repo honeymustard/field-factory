@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeymustard\AcfFactory\Library\Links;
+namespace Honeymustard\FieldFactory\Library\Links;
 
 /**
  * A concrete link implementation.
