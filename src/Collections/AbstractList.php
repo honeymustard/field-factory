@@ -15,7 +15,8 @@ abstract class AbstractList implements \Iterator
      *
      * @return int
      */
-    public function length() {
+    public function length()
+    {
         return count($this->list);
     }
 
@@ -24,7 +25,8 @@ abstract class AbstractList implements \Iterator
      *
      * @return void
      */
-    public function rewind() {
+    public function rewind()
+    {
         $this->position = 0;
     }
 
@@ -33,7 +35,8 @@ abstract class AbstractList implements \Iterator
      *
      * @return mixed
      */
-    public function current() {
+    public function current()
+    {
         return $this->list[$this->position];
     }
 
@@ -42,7 +45,8 @@ abstract class AbstractList implements \Iterator
      *
      * @return int
      */
-    public function key() {
+    public function key()
+    {
         return $this->position;
     }
 
@@ -51,7 +55,8 @@ abstract class AbstractList implements \Iterator
      *
      * @return void
      */
-    public function next() {
+    public function next()
+    {
         ++$this->position;
     }
 
@@ -60,7 +65,8 @@ abstract class AbstractList implements \Iterator
      *
      * @return boolean
      */
-    public function valid() {
+    public function valid()
+    {
         return isset($this->list[$this->position]);
     }
 
@@ -71,16 +77,65 @@ abstract class AbstractList implements \Iterator
      *
      * @return boolean
      */
-    public function push($item) {
+    public function push($item)
+    {
         $this->list[] = $item;
     }
 
     /**
-     * Get the inner array structure.
+     * Set an item at a given index.
+     *
+     * @param mixed $item
+     * @param int $index
+     *
+     * @return void
+     */
+    public function setItem($item, $index)
+    {
+        if (!$this->hasIndex($index)) {
+            $message = 'Could not set item at given index';
+            throw new \Exception($message);
+        }
+
+        $this->list[$index] = $item;
+    }
+
+    /**
+     * Get an item at a given index.
+     *
+     * @param int $index
+     *
+     * @return mixed
+     */
+    public function getItem($index)
+    {
+        if ($this->hasIndex($index)) {
+            return $this->list[$index];
+        }
+
+        $message = 'Could not get item at given index';
+        throw new \Exception($message);
+    }
+
+    /**
+     * Determine if an index is valid.
+     *
+     * @param int $index
+     *
+     * @return boolean
+     */
+    public function hasIndex($index)
+    {
+        return $index >= 0 && $index < $this->length();
+    }
+
+    /**
+     * Get the list structure.
      *
      * @return mixed[]
      */
-    public function toArray() {
+    public function getList()
+    {
         return $this->list;
     }
 }
