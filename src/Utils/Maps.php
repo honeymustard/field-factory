@@ -12,12 +12,13 @@ class Maps
      *
      * @param string $key   Lookup key.
      * @param string[] $map The map to look in.
+     * @param mixed $none   Optional empty value.
      *
      * @return mixed
      */
-    public static function get($key, $map)
+    public static function get($key, $map, $none = '')
     {
-        return isset($map[$key]) ? $map[$key] : '';
+        return isset($map[$key]) ? $map[$key] : $none;
     }
 
     /**
@@ -32,10 +33,23 @@ class Maps
      */
     public static function require($key, $map)
     {
-        if (isset($map[$key])) {
+        if (self::get($key, $map, false)) {
             return $map[$key];
         }
 
-        throw new \Exception('Required key "' . $key . '" was missing.');
+        throw new \Exception('Required key "' . $key . '" was missing or empty.');
+    }
+
+    /**
+     * Determine if a map entry is empty.
+     *
+     * @param string $key   Lookup key.
+     * @param string[] $map The map to look in.
+     *
+     * @return mixed
+     */
+    public static function empty($key, $map)
+    {
+        return self::get($key, $map) === '';
     }
 }
