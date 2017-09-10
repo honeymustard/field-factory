@@ -27,7 +27,7 @@ class Factory
      */
     public function getFields()
     {
-        return $this->list->toArray();
+        return $this->list->getList();
     }
 
     /**

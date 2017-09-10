@@ -9,8 +9,6 @@ use Honeymustard\FieldFactory\Conds;
  */
 class CondsList extends AbstractList
 {
-    private $conds = [];
-
     /**
      * Set the initial list.
      *
@@ -18,17 +16,9 @@ class CondsList extends AbstractList
      */
     public function __construct($conds = [])
     {
-        $this->conds = $conds;
-    }
-
-    /**
-     * Get list of conds.
-     *
-     * @return AbstractCond[] List of conds.
-     */
-    public function getConds()
-    {
-        return $this->conds;
+        foreach ($conds as $cond) {
+            $this->subjoin($cond);
+        }
     }
 
     /**
@@ -38,64 +28,58 @@ class CondsList extends AbstractList
      */
     public function toArray()
     {
-        $list = [];
-        $conds = $this->getConds();
+        $temp = [];
+        $conds = $this->getList();
 
         for ($i = 0; $i < count($conds); $i++) {
             for ($j = 0; $j < count($conds[$i]); $j++) {
-                $list[$i][$j] = $conds[$i][$j]->toArray();
+                $temp[$i][$j] = $conds[$i][$j]->toArray();
             }
         }
 
-        return $list;
+        return $temp;
     }
 
     /**
      * Add a condition to the conds list.
      *
      * @param AbstractCond $cond Condition to add.
-     * @return void
+     *
+     * @return CondsList
      */
     public function subjoin(Conds\AbstractCond $cond)
     {
-        $conds = $this->getConds();
-        array_push($conds, [$cond]);
-        $this->conds = $conds;
+        $this->push([$cond]);
+        return $this;
     }
 
     /**
      * Add a condition to one or all conditions.
      *
-     * @param AbstractCond $cond Single condition to add.
-     * @return void
+     * @param AbstractCond $cond Condition to add.
+     * @param int $index         Conjoin at an optional index.
+     *
+     * @return CondsList
      */
     public function conjoin(Conds\AbstractCond $cond, $index = -1)
     {
-        $conds = $this->getConds();
         $length = $this->length();
 
         if ($length === 0) {
-            throw new \Exception('Cannot conjoin on empty list');
+            $message = 'Cannot conjoin on empty list';
+            throw new \Exception($message);
         }
 
         if ($index >= 0) {
-            array_push($conds[$index], $cond);
+            $item = array_merge($this->getItem($index), [$cond]);
+            $this->setItem($item, $index);
         } else {
             for ($i = 0; $i < $length; $i++) {
-                array_push($conds[$i], $cond);
+                $item = array_merge($this->getItem($i), [$cond]);
+                $this->setItem($item, $i);
             }
         }
 
-        $this->conds = $conds;
-    }
-
-    /**
-     * Get the list length.
-     *
-     * @return int
-     */
-    public function length()
-    {
-        return count($this->getConds());
+        return $this;
     }
 }
