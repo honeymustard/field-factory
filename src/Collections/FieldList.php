@@ -9,8 +9,6 @@ use Honeymustard\FieldFactory\Fields;
  */
 class FieldList extends AbstractList
 {
-    private $fields = [];
-
     /**
      * Set the initial list.
      *
@@ -18,7 +16,9 @@ class FieldList extends AbstractList
      */
     public function __construct($fields = [])
     {
-        $this->fields = $fields;
+        foreach ($fields as $field) {
+            $this->append($field);
+        }
     }
 
     /**
@@ -30,24 +30,7 @@ class FieldList extends AbstractList
      */
     public function append(Fields\AbstractField $field)
     {
-        $this->fields[] = $field;
-    }
-
-    /**
-     * Get a field at a given index,
-     *
-     * @param int $index Index of field.
-     *
-     * @return AbstractField
-     */
-    public function indexOf($index)
-    {
-        if (isset($this->fields[$index])) {
-            return $this->fields[$index];
-        }
-
-        $message = 'Could not get field at invalid index';
-        trigger_error($message, E_USER_ERROR);
+        $this->push($field);
     }
 
     /**
@@ -57,16 +40,6 @@ class FieldList extends AbstractList
      */
     public function getFields()
     {
-        return $this->fields;
-    }
-
-    /**
-     * Get the length of the list.
-     *
-     * @return int
-     */
-    public function length()
-    {
-        return count($this->getFields());
+        return $this->getList();
     }
 }

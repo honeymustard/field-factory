@@ -65,13 +65,13 @@ abstract class AbstractList implements \Iterator
     }
 
     /**
-     * Add an item to the list.
+     * Append an item to the list.
      *
      * @param mixed $item
      *
      * @return boolean
      */
-    public function setItem($item) {
+    public function push($item) {
         $this->list[] = $item;
     }
 
