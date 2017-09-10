@@ -21,11 +21,21 @@ class Factory
     }
 
     /**
-     * Get the field list instance.
+     * Get the list of fields.
+     *
+     * @return AbstractField[]
+     */
+    public function getFields()
+    {
+        return $this->list->toArray();
+    }
+
+    /**
+     * Get the field list.
      *
      * @return FieldList
      */
-    public function getList()
+    protected function getList()
     {
         return $this->list;
     }
