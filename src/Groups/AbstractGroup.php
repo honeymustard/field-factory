@@ -2,6 +2,8 @@
 
 namespace Honeymustard\FieldFactory\Groups;
 
+use Honeymustard\FieldFactory\Factory;
+
 /**
  * Base class for all groups.
  */
@@ -17,6 +19,18 @@ abstract class AbstractGroup
     public function __construct($id)
     {
         $this->id = $this->setID($id);
+    }
+
+    /**
+     * Register this group.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        add_action('init', function () {
+            acf_add_local_field_group($this->toArray());
+        });
     }
 
     /**
@@ -53,14 +67,17 @@ abstract class AbstractGroup
      *
      * @return string
      */
-    abstract public function getTitle();
+    public function getTitle()
+    {
+        return esc_html__('FieldFactory\Group', 'field-factory');
+    }
 
     /**
      * Get the list of fields.
      *
      * @return string[]
      */
-    abstract public function getFields();
+    abstract public function getFactory();
 
     /**
      * Get a list of locations.
@@ -70,16 +87,32 @@ abstract class AbstractGroup
     abstract public function getLocations();
 
     /**
+     * Get the fields from a factory.
+     *
+     * @param Factory $factory A field factory.
+     *
+     * @return string[]
+     */
+    protected function getFields(Factory $factory)
+    {
+        $cb = function ($item) {
+            return $item->getArgs();
+        };
+
+        return array_map($cb, $factory->getFields());
+    }
+
+    /**
      * Get the complete group.
      *
      * @return string[]
      */
-    public function getGroup()
+    public function toArray()
     {
         return [
             'key'                   => $this->getKey(),
             'title'                 => $this->getTitle(),
-            'fields'                => $this->getFields(),
+            'fields'                => $this->getFields($this->getFactory()),
             'location'              => $this->getLocations(),
             'menu_order'            => $this->getMenuOrder(),
             'position'              => $this->getPosition(),

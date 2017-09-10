@@ -34,13 +34,13 @@ class Group
     }
 
     /**
-     * Get the list of fields.
+     * Get the factory instance.
      *
-     * @return string[]
+     * @return Factory
      */
-    public function getFields()
+    public function getFactory()
     {
-        return [];
+        return null;
     }
 
     /**
