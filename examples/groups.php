@@ -10,52 +10,52 @@ use Honeymustard\FieldFactory\Conds;
  */
 class Modules extends Groups\AbstractGroup {
 
-	/**
+    /**
      * Add a group title.
      *
      * @return string
      */
-	public function getTitle() {
-		return 'Modules';
-	}
+    public function getTitle() {
+        return 'Modules';
+    }
 
     /**
      * Add fields by using the field factory.
      *
      * @return Factory
      */
-	public function getFactory() {
+    public function getFactory() {
 
-		$fact = new FieldFactory\Factory();
+        $fact = new FieldFactory\Factory();
 
-		$fact->text([
-			'key'   => 'modules_1489398381',
-			'name'  => 'modules_text_1',
+        $fact->text([
+            'key'   => 'modules_1489398381',
+            'name'  => 'modules_text_1',
             'label' => 'Text 1',
-		]);
+        ]);
 
-		$fact->text([
-			'key'   => 'modules_1489398382',
-			'name'  => 'modules_text_2',
+        $fact->text([
+            'key'   => 'modules_1489398382',
+            'name'  => 'modules_text_2',
             'label' => 'Text 2',
-		]);
+        ]);
 
-		return $fact;
-	}
+        return $fact;
+    }
 
-	/**
+    /**
      * Add locations by using a conditions lists.
      *
      * @return CondsList
      */
-	public function getLocations() {
+    public function getLocations() {
 
-		$conds = new Collections\CondsList();
-		$conds->subjoin(new Conds\Param('post_type', '==', 'post'));
-		$conds->subjoin(new Conds\Param('post_type', '==', 'page'));
+        $conds = new Collections\CondsList();
+        $conds->subjoin(new Conds\Param('post_type', '==', 'post'));
+        $conds->subjoin(new Conds\Param('post_type', '==', 'page'));
 
-		return $conds->toArray();
-	}
+        return $conds->toArray();
+    }
 }
 
 /**
