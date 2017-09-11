@@ -2,6 +2,8 @@
 
 namespace Honeymustard\FieldFactory\Layouts;
 
+use Honeymustard\FieldFactory\Factory;
+
 /**
  * Base class for all layouts.
  */
@@ -26,35 +28,42 @@ abstract class AbstractLayout
      *
      * @return string
      */
-    public function setID($id)
+    final protected function setID($id)
     {
         $id = strval($id);
 
         if (empty($id)) {
             $message = 'A layout must have a valid identifier';
-            trigger_error($message, E_USER_ERROR);
+            throw new \Exception($message);
         }
 
         return $id;
     }
 
     /**
-     * Get the layout.
+     * Get the complete layout.
      *
      * @return string[] layout array.
      */
-    public function getLayout()
+    public function getArgs()
     {
         return [
             'key'        => $this->getKey(),
             'label'      => $this->getLabel(),
             'name'       => $this->getID(),
             'display'    => $this->getDisplay(),
-            'sub_fields' => $this->getSubFields(),
+            'sub_fields' => $this->getFactory()->toArray(),
             'min'        => $this->getMinLayouts(),
             'max'        => $this->getMaxLayouts(),
         ];
     }
+
+    /**
+     * Get the list of fields.
+     *
+     * @return string[]
+     */
+    abstract public function getFactory();
 
     /**
      * Get the key.
@@ -71,26 +80,19 @@ abstract class AbstractLayout
      *
      * @return string
      */
-    abstract protected function getLabel();
+    public function getLabel()
+    {
+        return 'FieldFactory\Layout';
+    }
 
     /**
      * Get the display value.
      *
      * @return string
      */
-    protected function getDisplay()
+    public function getDisplay()
     {
         return 'block';
-    }
-
-    /**
-     * Get the sub fields.
-     *
-     * @return string[] list of sub fields.
-     */
-    protected function getSubFields()
-    {
-        return [];
     }
 
     /**
@@ -98,7 +100,7 @@ abstract class AbstractLayout
      *
      * @return string|int
      */
-    protected function getMinLayouts()
+    public function getMinLayouts()
     {
         return '';
     }
@@ -108,7 +110,7 @@ abstract class AbstractLayout
      *
      * @return string|int
      */
-    protected function getMaxLayouts()
+    public function getMaxLayouts()
     {
         return '';
     }

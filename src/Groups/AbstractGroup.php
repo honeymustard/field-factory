@@ -46,7 +46,7 @@ abstract class AbstractGroup
 
         if (empty($id)) {
             $message = 'A group must have a valid identifier';
-            trigger_error($message, E_USER_ERROR);
+            throw new \Exception($message);
         }
 
         return $id;
@@ -69,7 +69,7 @@ abstract class AbstractGroup
      */
     public function getTitle()
     {
-        return esc_html__('FieldFactory\Group', 'field-factory');
+        return 'FieldFactory\Group';
     }
 
     /**
@@ -87,22 +87,6 @@ abstract class AbstractGroup
     abstract public function getLocations();
 
     /**
-     * Get the fields from a factory.
-     *
-     * @param Factory $factory A field factory.
-     *
-     * @return string[]
-     */
-    protected function getFields(Factory $factory)
-    {
-        $cb = function ($item) {
-            return $item->getArgs();
-        };
-
-        return array_map($cb, $factory->getFields());
-    }
-
-    /**
      * Get the complete group.
      *
      * @return string[]
@@ -112,7 +96,7 @@ abstract class AbstractGroup
         return [
             'key'                   => $this->getKey(),
             'title'                 => $this->getTitle(),
-            'fields'                => $this->getFields($this->getFactory()),
+            'fields'                => $this->getFactory()->toArray(),
             'location'              => $this->getLocations(),
             'menu_order'            => $this->getMenuOrder(),
             'position'              => $this->getPosition(),
