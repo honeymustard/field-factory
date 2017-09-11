@@ -1,5 +1,7 @@
 <?php
 
+include(__DIR__ . '/layouts.php');
+
 use Honeymustard\FieldFactory;
 use Honeymustard\FieldFactory\Groups;
 use Honeymustard\FieldFactory\Collections;
@@ -38,6 +40,15 @@ class Modules extends Groups\AbstractGroup {
             'key'   => 'modules_1489398382',
             'name'  => 'modules_text_2',
             'label' => 'Text 2',
+        ]);
+
+        $fact->flexibleContent([
+            'key'     => 'modules_1489398383',
+            'name'    => 'modules_flex',
+            'label'   => 'Flexible 1',
+            'layouts' => [
+                new ContentModule('content'),
+            ],
         ]);
 
         return $fact;
