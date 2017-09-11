@@ -21,6 +21,44 @@ class Factory
     }
 
     /**
+     * Convert the fields list to an array.
+     *
+     * @return string[]
+     */
+    public function toArray()
+    {
+        return $this->toArrayRec($this->getFields());
+    }
+
+    /**
+     * Recursively convert the fields list to an array.
+     *
+     * @param $fields AbstractField[] A list of fields.
+     *
+     * @return string[]
+     */
+    protected function toArrayRec($fields)
+    {
+        if (empty($fields)) {
+            return [];
+        }
+
+        $list = [];
+
+        foreach ($fields as $k => $v) {
+            if (is_array($v)) {
+                $list[$k] = $this->toArrayRec($v);
+            } else if(is_object($v)) {
+                $list[$k] = $this->toArrayRec($v->getArgs());
+            } else {
+                $list[$k] = $v;
+            }
+        }
+
+        return $list;
+    }
+
+    /**
      * Get the list of fields.
      *
      * @return AbstractField[]
