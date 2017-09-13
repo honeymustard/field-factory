@@ -1,12 +1,12 @@
 <?php
 
-use Honeymustard\FieldFactory;
-use Honeymustard\FieldFactory\Layouts;
+use Honeymustard\FieldFactory\Factory;
+use Honeymustard\FieldFactory\Layouts\AbstractLayout;
 
 /**
  * Create a layout by extending the default layout.
  */
-class ContentModule extends Layouts\AbstractLayout {
+class ContentModule extends AbstractLayout {
 
     /**
      * Add fields by using the field factory.
@@ -15,7 +15,7 @@ class ContentModule extends Layouts\AbstractLayout {
      */
     public function getFactory() {
 
-        $fact = new FieldFactory\Factory();
+        $fact = new Factory();
 
         $fact->text([
             'key'   => 'layout_1489398384',
