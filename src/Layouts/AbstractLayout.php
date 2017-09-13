@@ -3,7 +3,8 @@
 namespace Honeymustard\FieldFactory\Layouts;
 
 use Honeymustard\FieldFactory\Factory;
-use Honeymustard\FieldFactory\Utils;
+use Honeymustard\FieldFactory\Utils\Maps;
+use Honeymustard\FieldFactory\Utils\Translator;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
@@ -22,7 +23,7 @@ abstract class AbstractLayout
     public function __construct($args = [])
     {
         $this->args = $args;
-        $this->translator = new Utils\Translator(new FieldDictionary());
+        $this->translator = new Translator(new FieldDictionary());
     }
 
     /**
@@ -102,9 +103,9 @@ abstract class AbstractLayout
      */
     protected function verify($args)
     {
-        Utils\Maps::require('key', $args);
-        Utils\Maps::require('name', $args);
-        Utils\Maps::require('sub_fields', $args);
+        Maps::require('key', $args);
+        Maps::require('name', $args);
+        Maps::require('sub_fields', $args);
 
         return $args;
     }

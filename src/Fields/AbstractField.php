@@ -2,7 +2,8 @@
 
 namespace Honeymustard\FieldFactory\Fields;
 
-use Honeymustard\FieldFactory\Utils;
+use Honeymustard\FieldFactory\Utils\Maps;
+use Honeymustard\FieldFactory\Utils\Translator;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
@@ -24,7 +25,7 @@ abstract class AbstractField
     {
         $this->type = $type;
         $this->args = $args;
-        $this->translator = new Utils\Translator(new FieldDictionary());
+        $this->translator = new Translator(new FieldDictionary());
     }
 
     /**
@@ -106,8 +107,8 @@ abstract class AbstractField
      */
     protected function verify($args)
     {
-        Utils\Maps::require('key', $args);
-        Utils\Maps::require('name', $args);
+        Maps::require('key', $args);
+        Maps::require('name', $args);
 
         return $args;
     }
