@@ -196,6 +196,7 @@ abstract class AbstractGroup
             'send-trackbacks',
         ];
     }
+
     /**
      * Get the ID.
      *

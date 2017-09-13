@@ -49,7 +49,7 @@ class Factory
             if (is_array($v)) {
                 $list[$k] = $this->toArrayRec($v);
             } else if(is_object($v)) {
-                $list[$k] = $this->toArrayRec($v->getArgs());
+                $list[$k] = $this->toArrayRec($v->toArray());
             } else {
                 $list[$k] = $v;
             }

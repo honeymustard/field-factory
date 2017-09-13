@@ -10,21 +10,21 @@ use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
  */
 abstract class AbstractField
 {
-    private $name = '';
-    private $translator = null;
+    private $type = '';
     private $args = [];
+    private $translator = null;
 
     /**
      * Construct a new field.
      *
-     * @param string $name   The name of the field.
+     * @param string $type   The type of the field.
      * @param string[] $args A list of field arguments.
      */
-    public function __construct($name, $args)
+    public function __construct($type, $args)
     {
-        $this->name = $name;
+        $this->type = $type;
+        $this->args = $args;
         $this->translator = new Utils\Translator(new FieldDictionary());
-        $this->args = $this->parse($args);
     }
 
     /**
@@ -32,11 +32,11 @@ abstract class AbstractField
      *
      * @return string[]
      */
-    protected function getDefaultArgs()
+    final protected function getDefaultArgs()
     {
         return [
             'key'       => '',
-            'type'      => $this->getName(),
+            'type'      => $this->getType(),
             'label'     => '',
             'name'      => '',
             'instr'     => '',
@@ -45,6 +45,16 @@ abstract class AbstractField
             'wrapper'   => $this->getWrapArgs(),
             'placement' => 'top',
         ];
+    }
+
+    /**
+     * Get the default arguments from the concrete field.
+     *
+     * @return string[]
+     */
+    protected function getFieldArgs()
+    {
+        return [];
     }
 
     /**
@@ -127,13 +137,13 @@ abstract class AbstractField
     }
 
     /**
-     * Get the name.
+     * Get the type.
      *
      * @return string
      */
-    public function getName()
+    public function getType()
     {
-        return $this->name;
+        return $this->type;
     }
 
     /**
@@ -144,5 +154,15 @@ abstract class AbstractField
     public function getArgs()
     {
         return $this->args;
+    }
+
+    /**
+     * Convert field to an array.
+     *
+     * @return string[]
+     */
+    final public function toArray()
+    {
+        return $this->parse($this->getArgs());
     }
 }
