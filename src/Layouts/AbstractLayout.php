@@ -3,76 +3,120 @@
 namespace Honeymustard\FieldFactory\Layouts;
 
 use Honeymustard\FieldFactory\Factory;
+use Honeymustard\FieldFactory\Utils;
+use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
  * Base class for all layouts.
  */
 abstract class AbstractLayout
 {
-    private $id = '';
+    private $args = [];
+    private $translator = null;
 
     /**
      * Construct a new layout.
      *
-     * @param string $id A unique ID.
+     * @param string[] $args A list of arguments.
      */
-    public function __construct($id)
+    public function __construct($args = [])
     {
-        $this->id = $this->setID($id);
+        $this->args = $args;
+        $this->translator = new Utils\Translator(new FieldDictionary());
     }
 
     /**
-     * Set the ID.
+     * Get the default arguments.
      *
-     * @param string $id The layout ID.
-     *
-     * @return string
+     * @return string[]
      */
-    final protected function setID($id)
-    {
-        $id = strval($id);
-
-        if (empty($id)) {
-            $message = 'A layout must have a valid identifier';
-            throw new \Exception($message);
-        }
-
-        return $id;
-    }
-
-    /**
-     * Get the complete layout.
-     *
-     * @return string[] layout array.
-     */
-    public function getArgs()
+    final protected function getDefaultArgs()
     {
         return [
-            'key'        => $this->getKey(),
-            'label'      => $this->getLabel(),
-            'name'       => $this->getID(),
-            'display'    => $this->getDisplay(),
-            'sub_fields' => $this->getFactory()->toArray(),
-            'min'        => $this->getMinLayouts(),
-            'max'        => $this->getMaxLayouts(),
+            'key'     => '',
+            'label'   => $this->getLabel(),
+            'name'    => '',
+            'subs'    => $this->getFactory()->toArray(),
+            'display' => $this->getDisplay(),
+            'min'     => $this->getMinLayouts(),
+            'max'     => $this->getMaxLayouts(),
         ];
     }
 
     /**
-     * Get the list of fields.
+     * Get the default arguments from the concrete layout.
      *
      * @return string[]
      */
-    abstract public function getFactory();
+    protected function getFieldArgs()
+    {
+        return [];
+    }
 
     /**
-     * Get the key.
+     * Parse a list of arguments.
      *
-     * @return string
+     * @param string[] $args List of arguments.
+     *
+     * @return string[]
      */
-    public function getKey()
+    protected function parse($args)
     {
-        return 'layout_' . $this->getID();
+        $a = $this->getDefaultArgs();
+        $b = $this->getFieldArgs();
+
+        return $this->verify($this->merge($a, $this->merge($b, $args)));
+    }
+
+    /**
+     * Merge a list of arguments
+     *
+     * @param string[] $a List of arguments.
+     * @param string[] $b List of arguments.
+     *
+     * @return string[]
+     */
+    protected function merge($a, $b)
+    {
+        return array_merge($this->translate($a), $this->translate($b));
+    }
+
+    /**
+     * Translate a list of arguments
+     *
+     * @param string[] $args List of arguments.
+     *
+     * @return string[]
+     */
+    protected function translate($args)
+    {
+        return $this->getTranslator()->translate($args);
+    }
+
+    /**
+     * Verify a list of arguments.
+     *
+     * @param string[] $args List of arguments.
+     *
+     * @return string[]
+     */
+    protected function verify($args)
+    {
+        Utils\Maps::require('key', $args);
+        Utils\Maps::require('name', $args);
+        Utils\Maps::require('sub_fields', $args);
+
+        return $args;
+    }
+
+    /**
+     * Get the factory instance.
+     *
+     * @return Factory
+     */
+    public function getFactory()
+    {
+        return new Factory();
     }
 
     /**
@@ -116,12 +160,32 @@ abstract class AbstractLayout
     }
 
     /**
-     * Get the ID.
+     * Get the arguments.
      *
-     * @return string
+     * @return string[]
      */
-    public function getID()
+    public function getArgs()
     {
-        return $this->id;
+        return $this->args;
+    }
+
+    /**
+     * Get the translator.
+     *
+     * @return Translator
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
+
+    /**
+     * Convert field to an array.
+     *
+     * @return string[]
+     */
+    final public function toArray()
+    {
+        return $this->parse($this->getArgs());
     }
 }
