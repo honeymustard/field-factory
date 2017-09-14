@@ -3,22 +3,30 @@
 namespace Honeymustard\FieldFactory\Groups;
 
 use Honeymustard\FieldFactory\Factory;
+use Honeymustard\FieldFactory\Utils\Maps;
+use Honeymustard\FieldFactory\Utils\Translator;
+use Honeymustard\FieldFactory\Abilities\Mergable;
+use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
  * Base class for all groups.
  */
 abstract class AbstractGroup
 {
-    private $id = '';
+    use Mergable;
+
+    private $args = [];
+    private $translator = null;
 
     /**
      * Construct a new group.
      *
-     * @param string $id A unique ID.
+     * @param string[] $args A list of field arguments.
      */
-    public function __construct($id)
+    public function __construct($args)
     {
-        $this->id = $this->setID($id);
+        $this->args = $args;
+        $this->translator = new Translator(new FieldDictionary());
     }
 
     /**
@@ -31,35 +39,6 @@ abstract class AbstractGroup
         add_action('init', function () {
             acf_add_local_field_group($this->toArray());
         });
-    }
-
-    /**
-     * Set the ID.
-     *
-     * @param string $id The group ID.
-     *
-     * @return string
-     */
-    protected function setID($id)
-    {
-        $id = strval($id);
-
-        if (empty($id)) {
-            $message = 'A group must have a valid identifier';
-            throw new \Exception($message);
-        }
-
-        return $id;
-    }
-
-    /**
-     * Get the key.
-     *
-     * @return string
-     */
-    public function getKey()
-    {
-        return 'group_'.$this->getID();
     }
 
     /**
@@ -87,14 +66,14 @@ abstract class AbstractGroup
     abstract public function getLocations();
 
     /**
-     * Get the complete group.
+     * Get the default arguments.
      *
      * @return string[]
      */
-    public function toArray()
+    final protected function getDefaultArgs()
     {
         return [
-            'key'                   => $this->getKey(),
+            'key'                   => '',
             'title'                 => $this->getTitle(),
             'fields'                => $this->getFactory()->toArray(),
             'location'              => $this->getLocations(),
@@ -107,6 +86,16 @@ abstract class AbstractGroup
             'active'                => $this->getActive(),
             'description'           => $this->getDescription(),
         ];
+    }
+
+    /**
+     * Get the default arguments from a subtype.
+     *
+     * @return string[]
+     */
+    protected function getFieldArgs()
+    {
+        return [];
     }
 
     /**
@@ -198,12 +187,50 @@ abstract class AbstractGroup
     }
 
     /**
-     * Get the ID.
+     * Verify a list of arguments.
      *
-     * @return string
+     * @param string[] $args List of arguments.
+     *
+     * @return string[]
      */
-    public function getID()
+    protected function verify($args)
     {
-        return $this->id;
+        Maps::require('key', $args);
+
+        return $args;
+    }
+
+    /**
+     * Get the translator.
+     *
+     * @return Translator
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
+    }
+
+    /**
+     * Get the arguments.
+     *
+     * @return string[]
+     */
+    public function getArgs()
+    {
+        return $this->args;
+    }
+
+    /**
+     * Convert field to an array.
+     *
+     * @return string[]
+     */
+    final public function toArray()
+    {
+        return $this->parse([
+            $this->getDefaultArgs(),
+            $this->getFieldArgs(),
+            $this->getArgs(),
+        ]);
     }
 }
