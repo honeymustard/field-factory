@@ -14,15 +14,6 @@ use Honeymustard\FieldFactory\Layouts;
 class Modules extends Groups\AbstractGroup {
 
     /**
-     * Add a group title.
-     *
-     * @return string
-     */
-    public function getTitle() {
-        return 'Modules';
-    }
-
-    /**
      * Add fields by using the field factory.
      *
      * @return Factory
@@ -101,5 +92,9 @@ class Modules extends Groups\AbstractGroup {
 /**
  * Pass a unique ID for this group.
  */
-$group = new Modules('modules');
+$group = new Modules([
+    'key'   => 'modules_1489398390',
+    'title' => 'Modules',
+]);
+
 $group->register();
