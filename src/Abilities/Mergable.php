@@ -33,10 +33,12 @@ trait Mergable
     public function parse($args = [])
     {
         if (count($args) <= 1) {
-            return $this->verify($args);
+            $args = $this->translate($args);
         } else {
-            return $this->verify($this->combine($args));
+            $args = $this->combine($args);
         }
+
+        return $this->verify($args);
     }
 
     /**
