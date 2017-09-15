@@ -2,7 +2,7 @@
 
 namespace Honeymustard\FieldFactory\Collections;
 
-use Honeymustard\FieldFactory\Conds;
+use Honeymustard\FieldFactory\Conds\AbstractCond;
 
 /**
  * Class to handle lists of conditionals.
@@ -47,7 +47,7 @@ class CondsList extends AbstractList
      *
      * @return CondsList
      */
-    public function subjoin(Conds\AbstractCond $cond)
+    public function subjoin(AbstractCond $cond)
     {
         $this->push([$cond]);
         return $this;
@@ -61,7 +61,7 @@ class CondsList extends AbstractList
      *
      * @return CondsList
      */
-    public function conjoin(Conds\AbstractCond $cond, $index = -1)
+    public function conjoin(AbstractCond $cond, $index = -1)
     {
         $length = $this->length();
 

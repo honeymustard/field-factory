@@ -2,7 +2,7 @@
 
 namespace Honeymustard\FieldFactory\Collections;
 
-use Honeymustard\FieldFactory\Fields;
+use Honeymustard\FieldFactory\Fields\AbstractField;
 
 /**
  * Maintains a lists of field objects.
@@ -28,7 +28,7 @@ class FieldList extends AbstractList
      *
      * @return void
      */
-    public function append(Fields\AbstractField $field)
+    public function append(AbstractField $field)
     {
         $this->push($field);
     }
