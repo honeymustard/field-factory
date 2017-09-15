@@ -26,6 +26,7 @@ class Keys
      * Get the complete field key.
      *
      * @param string $name Name for this field.
+     *
      * @return string
      */
     protected function getKey($name)
@@ -37,6 +38,8 @@ class Keys
      * Get the complete field name.
      *
      * @param string $name Name for this field.
+     *
+     * @return string
      */
     protected function getName($name)
     {

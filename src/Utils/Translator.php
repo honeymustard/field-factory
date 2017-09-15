@@ -2,7 +2,7 @@
 
 namespace Honeymustard\FieldFactory\Utils;
 
-use Honeymustard\FieldFactory\Dictionaries;
+use Honeymustard\FieldFactory\Dictionaries\AbstractDictionary;
 
 /**
  * Controls translation of field arguments.
@@ -16,7 +16,7 @@ class Translator
      *
      * @param AbstractDictionary $dictionary
      */
-    public function __construct(Dictionaries\AbstractDictionary $dictionary)
+    public function __construct(AbstractDictionary $dictionary)
     {
         $this->dictionary = $dictionary;
     }
