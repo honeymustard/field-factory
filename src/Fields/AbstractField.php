@@ -4,6 +4,7 @@ namespace Honeymustard\FieldFactory\Fields;
 
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Translator;
+use Honeymustard\FieldFactory\Abilities\Mergable;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
@@ -11,6 +12,8 @@ use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
  */
 abstract class AbstractField
 {
+    use Mergable;
+
     private $type = '';
     private $args = [];
     private $translator = null;
@@ -59,46 +62,6 @@ abstract class AbstractField
     }
 
     /**
-     * Parse a list of arguments.
-     *
-     * @param string[] $args List of arguments.
-     *
-     * @return string[]
-     */
-    protected function parse($args)
-    {
-        $a = $this->getDefaultArgs();
-        $b = $this->getFieldArgs();
-
-        return $this->verify($this->merge($a, $this->merge($b, $args)));
-    }
-
-    /**
-     * Merge a list of arguments
-     *
-     * @param string[] $a List of arguments.
-     * @param string[] $b List of arguments.
-     *
-     * @return string[]
-     */
-    protected function merge($a, $b)
-    {
-        return array_merge($this->translate($a), $this->translate($b));
-    }
-
-    /**
-     * Translate a list of arguments
-     *
-     * @param string[] $args List of arguments.
-     *
-     * @return string[]
-     */
-    protected function translate($args)
-    {
-        return $this->getTranslator()->translate($args);
-    }
-
-    /**
      * Verify a list of arguments.
      *
      * @param string[] $args List of arguments.
@@ -128,16 +91,6 @@ abstract class AbstractField
     }
 
     /**
-     * Get the translator.
-     *
-     * @return Translator
-     */
-    public function getTranslator()
-    {
-        return $this->translator;
-    }
-
-    /**
      * Get the type.
      *
      * @return string
@@ -145,6 +98,16 @@ abstract class AbstractField
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Get the translator.
+     *
+     * @return Translator
+     */
+    public function getTranslator()
+    {
+        return $this->translator;
     }
 
     /**
@@ -164,6 +127,10 @@ abstract class AbstractField
      */
     final public function toArray()
     {
-        return $this->parse($this->getArgs());
+        return $this->parse([
+            $this->getDefaultArgs(),
+            $this->getFieldArgs(),
+            $this->getArgs(),
+        ]);
     }
 }

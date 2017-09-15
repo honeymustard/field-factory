@@ -5,6 +5,7 @@ namespace Honeymustard\FieldFactory\Layouts;
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Translator;
+use Honeymustard\FieldFactory\Abilities\Mergable;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
@@ -12,6 +13,8 @@ use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
  */
 abstract class AbstractLayout
 {
+    use Mergable;
+
     private $args = [];
     private $translator = null;
 
@@ -45,53 +48,13 @@ abstract class AbstractLayout
     }
 
     /**
-     * Get the default arguments from the concrete layout.
+     * Get the default arguments from a subtype.
      *
      * @return string[]
      */
     protected function getFieldArgs()
     {
         return [];
-    }
-
-    /**
-     * Parse a list of arguments.
-     *
-     * @param string[] $args List of arguments.
-     *
-     * @return string[]
-     */
-    protected function parse($args)
-    {
-        $a = $this->getDefaultArgs();
-        $b = $this->getFieldArgs();
-
-        return $this->verify($this->merge($a, $this->merge($b, $args)));
-    }
-
-    /**
-     * Merge a list of arguments
-     *
-     * @param string[] $a List of arguments.
-     * @param string[] $b List of arguments.
-     *
-     * @return string[]
-     */
-    protected function merge($a, $b)
-    {
-        return array_merge($this->translate($a), $this->translate($b));
-    }
-
-    /**
-     * Translate a list of arguments
-     *
-     * @param string[] $args List of arguments.
-     *
-     * @return string[]
-     */
-    protected function translate($args)
-    {
-        return $this->getTranslator()->translate($args);
     }
 
     /**
@@ -161,16 +124,6 @@ abstract class AbstractLayout
     }
 
     /**
-     * Get the arguments.
-     *
-     * @return string[]
-     */
-    public function getArgs()
-    {
-        return $this->args;
-    }
-
-    /**
      * Get the translator.
      *
      * @return Translator
@@ -181,12 +134,26 @@ abstract class AbstractLayout
     }
 
     /**
+     * Get the arguments.
+     *
+     * @return string[]
+     */
+    public function getArgs()
+    {
+        return $this->args;
+    }
+
+    /**
      * Convert field to an array.
      *
      * @return string[]
      */
     final public function toArray()
     {
-        return $this->parse($this->getArgs());
+        return $this->parse([
+            $this->getDefaultArgs(),
+            $this->getFieldArgs(),
+            $this->getArgs(),
+        ]);
     }
 }
