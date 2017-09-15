@@ -2,16 +2,16 @@
 
 include(__DIR__ . '/layouts.php');
 
-use Honeymustard\FieldFactory;
-use Honeymustard\FieldFactory\Groups;
-use Honeymustard\FieldFactory\Collections;
+use Honeymustard\FieldFactory\Factory;
+use Honeymustard\FieldFactory\Groups\AbstractGroup;
+use Honeymustard\FieldFactory\Collections\CondsList;
 use Honeymustard\FieldFactory\Conds;
-use Honeymustard\FieldFactory\Layouts;
+use Honeymustard\FieldFactory\Layouts\Layout;
 
 /**
  * Create a group named Modules by extending the default group.
  */
-class Modules extends Groups\AbstractGroup {
+class Modules extends AbstractGroup {
 
     /**
      * Add fields by using the field factory.
@@ -20,7 +20,7 @@ class Modules extends Groups\AbstractGroup {
      */
     public function getFactory() {
 
-        $fact = new FieldFactory\Factory();
+        $fact = new Factory();
 
         $fact->text([
             'key'   => 'modules_1489398381',
@@ -58,7 +58,7 @@ class Modules extends Groups\AbstractGroup {
      */
     protected function getImageLayout()
     {
-        $fact = new FieldFactory\Factory();
+        $fact = new Factory();
 
         $fact->image([
             'key'   => 'modules_1489398384',
@@ -66,7 +66,7 @@ class Modules extends Groups\AbstractGroup {
             'label' => 'Image',
         ]);
 
-        return new Layouts\Layout([
+        return new Layout([
             'key'   => 'layouts_1489398385',
             'name'  => 'layouts_image',
             'label' => 'Image Layout',
@@ -81,7 +81,7 @@ class Modules extends Groups\AbstractGroup {
      */
     public function getLocations() {
 
-        $conds = new Collections\CondsList();
+        $conds = new CondsList();
         $conds->subjoin(new Conds\Param('post_type', '==', 'post'));
         $conds->subjoin(new Conds\Param('post_type', '==', 'page'));
 
