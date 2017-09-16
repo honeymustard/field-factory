@@ -75,7 +75,7 @@ abstract class AbstractGroup
         return [
             'key'                   => '',
             'title'                 => $this->getTitle(),
-            'fields'                => $this->getFactory()->toArray(),
+            'fields'                => $this->getFactory(),
             'location'              => $this->getLocations(),
             'menu_order'            => $this->getMenuOrder(),
             'position'              => $this->getPosition(),
@@ -196,6 +196,7 @@ abstract class AbstractGroup
     protected function verify($args)
     {
         Maps::require('key', $args);
+        Maps::require('fields', $args);
 
         return $args;
     }
