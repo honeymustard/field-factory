@@ -2,37 +2,16 @@
 
 namespace Honeymustard\FieldFactory\Groups;
 
+use Honeymustard\FieldFactory\Factory;
+use Honeymustard\FieldFactory\Groups\AbstractGroup;
+use Honeymustard\FieldFactory\Collections\CondsList;
+use Honeymustard\FieldFactory\Conds\Param;
+
 /**
  * A concrete group implementation.
  */
-class Group
+class Group extends AbstractGroup
 {
-    private $args = [];
-
-    /**
-     * Construct a new group.
-     *
-     * @param string $id     A unique ID.
-     * @param string[] $args A map of arguments.
-     */
-    public function __construct($id, $args)
-    {
-        $this->args = $args;
-        parent::__construct($id);
-    }
-
-    /**
-     * Get the complete group.
-     *
-     * @return string[]
-     */
-    public function getGroup()
-    {
-        $args = $this->getArgs();
-
-        return parent::getGroup();
-    }
-
     /**
      * Get the factory instance.
      *
@@ -40,16 +19,20 @@ class Group
      */
     public function getFactory()
     {
-        return null;
+        return new Factory();
     }
 
     /**
-     * Get the arguments map.
+     * Get the locations list.
      *
-     * @return string[]
+     * @return CondsList
      */
-    public function getArgs()
-    {
-        return $this->args;
+    public function getLocations() {
+
+        $conds = new CondsList();
+        $conds->subjoin(new Param('post_type', '==', 'post'));
+        $conds->subjoin(new Param('post_type', '==', 'page'));
+
+        return $conds->toArray();
     }
 }
