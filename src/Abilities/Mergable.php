@@ -2,6 +2,8 @@
 
 namespace Honeymustard\FieldFactory\Abilities;
 
+use Honeymustard\FieldFactory\Utils\Converter;
+
 /**
  * Enables an object to merge field arguments.
  */
@@ -38,7 +40,7 @@ trait Mergable
             $args = $this->combine($args);
         }
 
-        return $this->verify($args);
+        return $this->verify(Converter::toArray($args));
     }
 
     /**

@@ -3,7 +3,9 @@
 namespace Honeymustard\FieldFactory;
 
 use Honeymustard\FieldFactory\Fields;
-use Honeymustard\FieldFactory\Collections;
+use Honeymustard\FieldFactory\Fields\AbstractField;
+use Honeymustard\FieldFactory\Collections\FieldList;
+use Honeymustard\FieldFactory\Utils\Converter;
 
 /**
  * Field generator class for all field types.
@@ -17,7 +19,7 @@ class Factory
      */
     public function __construct()
     {
-        $this->list = new Collections\FieldList();
+        $this->list = new FieldList();
     }
 
     /**
@@ -27,35 +29,7 @@ class Factory
      */
     public function toArray()
     {
-        return $this->toArrayRec($this->getFields());
-    }
-
-    /**
-     * Recursively convert the fields list to an array.
-     *
-     * @param $fields AbstractField[] A list of fields.
-     *
-     * @return string[]
-     */
-    protected function toArrayRec($fields)
-    {
-        if (empty($fields)) {
-            return [];
-        }
-
-        $list = [];
-
-        foreach ($fields as $k => $v) {
-            if (is_array($v)) {
-                $list[$k] = $this->toArrayRec($v);
-            } else if(is_object($v)) {
-                $list[$k] = $this->toArrayRec($v->toArray());
-            } else {
-                $list[$k] = $v;
-            }
-        }
-
-        return $list;
+        return Converter::toArray($this->getFields());
     }
 
     /**
@@ -85,7 +59,7 @@ class Factory
      *
      * @return Factory
      */
-    public function append(Fields\AbstractField $field)
+    public function append(AbstractField $field)
     {
         $this->getList()->append($field);
         return $this;
