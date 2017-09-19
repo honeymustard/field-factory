@@ -5,6 +5,7 @@ namespace Honeymustard\FieldFactory;
 use Honeymustard\FieldFactory\Fields;
 use Honeymustard\FieldFactory\Fields\AbstractField;
 use Honeymustard\FieldFactory\Collections\FieldList;
+use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Converter;
 
 /**
@@ -53,16 +54,95 @@ class Factory
     }
 
     /**
-     * Add a custom field type.
+     * Append a field to the factory list.
      *
      * @param AbstractField $field A valid field type.
      *
      * @return Factory
      */
-    public function append(AbstractField $field)
+    protected function append(AbstractField $field)
     {
         $this->getList()->append($field);
         return $this;
+    }
+
+    /**
+     * Add a custom field type.
+     *
+     * @param AbstractLibrary $field A valid library field.
+     *
+     * @return Factory
+     */
+    public function custom($field)
+    {
+        $list = $field->toArray();
+
+        foreach ($list as $item) {
+            $this->append($this->create($item));
+        }
+
+        return $this;
+    }
+
+    /**
+     * Create a field object from a list of args.
+     *
+     * @param string[] $args List of arguments.
+     *
+     * @return AbstractField
+     */
+    public static function create($args)
+    {
+        switch (Maps::get('type', $args, '')) {
+            case 'checkbox':
+                return new Fields\Checkbox($args);
+            case 'color_picker':
+                return new Fields\ColorPicker($args);
+            case 'date_time_picker':
+                return new Fields\DateTimePicker($args);
+            case 'email':
+                return new Fields\Email($args);
+            case 'file':
+                return new Fields\File($args);
+            case 'flexible_content':
+                return new Fields\FlexibleContent($args);
+            case 'google_map':
+                return new Fields\GoogleMap($args);
+            case 'image':
+                return new Fields\Image($args);
+            case 'message':
+                return new Fields\Message($args);
+            case 'number':
+                return new Fields\Number($args);
+            case 'oembed':
+                return new Fields\Oembed($args);
+            case 'post_object':
+                return new Fields\PostObject($args);
+            case 'radio':
+                return new Fields\Radio($args);
+            case 'relationship':
+                return new Fields\Relationship($args);
+            case 'repeater':
+                return new Fields\Repeater($args);
+            case 'select':
+                return new Fields\Select($args);
+            case 'tab':
+                return new Fields\Tab($args);
+            case 'text':
+                return new Fields\Text($args);
+            case 'textarea':
+                return new Fields\Textarea($args);
+            case 'true_false':
+                return new Fields\TrueFalse($args);
+            case 'url':
+                return new Fields\URL($args);
+            case 'user':
+                return new Fields\User($args);
+            case 'wysiwyg':
+                return new Fields\Wysiwyg($args);
+        }
+
+        throw new \Exception('Could not create item from unknown type');
     }
 
     /**
