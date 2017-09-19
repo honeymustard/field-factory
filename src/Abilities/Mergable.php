@@ -35,12 +35,12 @@ trait Mergable
     public function parse($args = [])
     {
         if (count($args) <= 1) {
-            $args = $this->translate($args);
+            $args = $this->conform($args);
         } else {
             $args = $this->combine($args);
         }
 
-        return $this->verify(Converter::toArray($args));
+        return $this->verify($args);
     }
 
     /**
@@ -73,7 +73,19 @@ trait Mergable
      */
     protected function merge($a, $b)
     {
-        return array_merge($this->translate($a), $this->translate($b));
+        return array_replace_recursive($this->conform($a), $this->conform($b));
+    }
+
+    /**
+     * Normalize a list of arguments.
+     *
+     * @param string[] $args List of arguments.
+     *
+     * @return string[]
+     */
+    protected function conform($args)
+    {
+        return $this->translate(Converter::toArray($args));
     }
 
     /**
