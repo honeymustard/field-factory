@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeymustard\FieldFactory;
+namespace Honeymustard\FieldFactory\Utils;
 
 /**
  * Disambiguates field keys and field names.
  */
-class Keys
+final class Keymaker
 {
     private $key = '';
     private $name = '';
@@ -29,9 +29,9 @@ class Keys
      *
      * @return string
      */
-    protected function getKey($name)
+    public function getKey($name)
     {
-        return $this->name . '_' . $name . '_' . $this->key;
+        return $this->name.'_'.$name.'_'.$this->key;
     }
 
     /**
@@ -41,8 +41,8 @@ class Keys
      *
      * @return string
      */
-    protected function getName($name)
+    public function getName($name)
     {
-        return $this->name . '_' . $name;
+        return $this->name.'_'.$name;
     }
 }
