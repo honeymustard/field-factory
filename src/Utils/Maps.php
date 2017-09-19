@@ -52,4 +52,17 @@ class Maps
     {
         return self::get($key, $map) === '';
     }
+
+    /**
+     * Determine if a map entry is set and true.
+     *
+     * @param string $key   Lookup key.
+     * @param string[] $map The map to look in.
+     *
+     * @return boolean
+     */
+    public static function true($key, $map)
+    {
+        return self::get($key, $map, false) === true;
+    }
 }
