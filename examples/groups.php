@@ -21,57 +21,26 @@ class Modules extends AbstractGroup {
     public function getFactory() {
 
         $fact = new Factory();
-
         $fact->text([
-            'key'   => 'modules_1489398381',
-            'name'  => 'modules_text_1',
-            'label' => 'Text 1',
-        ]);
-
-        $fact->text([
-            'key'   => 'modules_1489398382',
-            'name'  => 'modules_text_2',
-            'label' => 'Text 2',
+            'key'   => 'key_1489398381',
+            'name'  => 'modules_title',
+            'label' => 'Title',
         ]);
 
         $fact->flexibleContent([
-            'key'     => 'modules_1489398383',
-            'name'    => 'modules_flex',
-            'label'   => 'Flexible 1',
+            'key'     => 'key_1489398383',
+            'name'    => 'modules',
+            'label'   => 'Modules',
             'layouts' => [
                 new ContentModule([
-                    'key'   => 'layouts_1489398386',
-                    'name'  => 'layouts_content',
+                    'key'   => 'key_1489398386',
+                    'name'  => 'content_layout',
                     'label' => 'Content Layout',
                 ]),
-                $this->getImageLayout(),
             ],
         ]);
 
         return $fact;
-    }
-
-    /**
-     * Create an anonymous layout.
-     *
-     * @return AbstractLayout
-     */
-    protected function getImageLayout()
-    {
-        $fact = new Factory();
-
-        $fact->image([
-            'key'   => 'modules_1489398384',
-            'name'  => 'modules_image',
-            'label' => 'Image',
-        ]);
-
-        return new Layout([
-            'key'   => 'layouts_1489398385',
-            'name'  => 'layouts_image',
-            'label' => 'Image Layout',
-            'subs'  => $fact,
-        ]);
     }
 
     /**
@@ -90,10 +59,10 @@ class Modules extends AbstractGroup {
 }
 
 /**
- * Pass a unique ID for this group.
+ * Create a new group for modules.
  */
 $group = new Modules([
-    'key'   => 'modules_1489398390',
+    'key'   => 'key_1489398390',
     'title' => 'Modules',
 ]);
 

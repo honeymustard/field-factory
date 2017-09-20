@@ -17,10 +17,10 @@ class ContentModule extends AbstractLayout {
 
         $fact = new Factory();
 
-        $fact->text([
-            'key'   => 'layout_1489398384',
-            'name'  => 'layout_text_1',
-            'label' => 'Text 1',
+        $fact->textarea([
+            'key'   => 'key_1489398384',
+            'name'  => 'content',
+            'label' => 'Content',
         ]);
 
         return $fact;

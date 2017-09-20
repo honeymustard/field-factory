@@ -14,7 +14,7 @@ use Honeymustard\FieldFactory\Library\Links\LinkField;
  * by using the field name as a key.
  */
 $field = new LinkField([
-    'key'   => 'library_1489398392',
+    'key'   => 'key_1489398392',
     'name'  => 'library_link',
     'types' => ['none', 'internal', 'external', 'email'],
     'style' => false,
@@ -24,13 +24,13 @@ $field = new LinkField([
 ]);
 
 $fact = new Factory();
-$fact->custom($field);
+$fact->append($field);
 
 /**
  * Create an anonymous group.
  */
 $group = new Group([
-    'key'    => 'library_1489398390',
+    'key'    => 'key_1489398390',
     'title'  => 'Library',
     'fields' => $fact,
 ]);
