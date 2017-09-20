@@ -140,6 +140,8 @@ class Factory
                 return new Fields\User($args);
             case 'wysiwyg':
                 return new Fields\Wysiwyg($args);
+            default:
+                return new Fields\Unknown($args);
         }
 
         throw new \Exception('Could not create item from unknown type');
