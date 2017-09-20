@@ -7,6 +7,8 @@ use Honeymustard\FieldFactory\Fields\AbstractField;
 use Honeymustard\FieldFactory\Collections\FieldList;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Converter;
+use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
+use Honeymustard\FieldFactory\Library\AbstractLibrary;
 
 /**
  * Field generator class for all field types.
@@ -17,10 +19,18 @@ class Factory
 
     /**
      * Construct a new factory.
+     *
+     * @param AbstractField[] $fields Initial list of fields.
      */
-    public function __construct()
+    public function __construct($fields = [])
     {
         $this->list = new FieldList();
+
+        if (!empty($fields)) {
+            foreach ($fields as $field) {
+                $this->append($field);
+            }
+        }
     }
 
     /**
@@ -36,7 +46,7 @@ class Factory
     /**
      * Get the list of fields.
      *
-     * @return AbstractField[]
+     * @return Arrayable[]
      */
     public function getFields()
     {
@@ -56,29 +66,22 @@ class Factory
     /**
      * Append a field to the factory list.
      *
-     * @param AbstractField $field A valid field type.
+     * @param Arrayable $field A valid field type.
      *
      * @return Factory
      */
-    protected function append(AbstractField $field)
+    public function append(ArrayableInterface $field)
     {
-        $this->getList()->append($field);
-        return $this;
-    }
+        $list = $this->getList();
 
-    /**
-     * Add a custom field type.
-     *
-     * @param AbstractLibrary $field A valid library field.
-     *
-     * @return Factory
-     */
-    public function custom($field)
-    {
-        $list = $field->toArray();
+        if ($field instanceof AbstractLibrary) {
+            $items = $field->toArray();
 
-        foreach ($list as $item) {
-            $this->append($this->create($item));
+            foreach ($items as $item) {
+                $list->push($this->create($item));
+            }
+        } else {
+            $list->push($field);
         }
 
         return $this;
