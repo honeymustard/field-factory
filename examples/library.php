@@ -2,16 +2,32 @@
 
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Groups\Group;
-
-$fact = new Factory();
-$fact->text([
-    'key'   => 'library_1489398391',
-    'name'  => 'library_text',
-    'label' => 'Text',
-]);
+use Honeymustard\FieldFactory\Library\Links\LinkField;
 
 /**
- * Create a new anonymous group.
+ * Add a library to the factory list.
+ *
+ * The key and name values will be used
+ * to disambiguate all internal fields.
+ *
+ * Values from sub fields can be overidden
+ * by using the field name as a key.
+ */
+$field = new LinkField([
+    'key'   => 'library_1489398392',
+    'name'  => 'library_link',
+    'types' => ['none', 'internal', 'external', 'email'],
+    'style' => false,
+    'type'  => [
+        'label' => 'Override the type label',
+    ],
+]);
+
+$fact = new Factory();
+$fact->custom($field);
+
+/**
+ * Create an anonymous group.
  */
 $group = new Group([
     'key'    => 'library_1489398390',
