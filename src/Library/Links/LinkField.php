@@ -3,178 +3,71 @@
 namespace Honeymustard\FieldFactory\Library\Links;
 
 use Honeymustard\FieldFactory\Fields;
+use Honeymustard\FieldFactory\Factory;
+use Honeymustard\FieldFactory\Collections\CondsList;
+use Honeymustard\FieldFactory\Conds\Cond;
 use Honeymustard\FieldFactory\Utils\Maps;
+use Honeymustard\FieldFactory\Library\AbstractLibrary;
 
 /**
  * A link field implementation.
  */
-class LinkField implements Fields\AbstractField
+class LinkField extends AbstractLibrary
 {
-    private $factory = null;
-    private $key = '';
-    private $name = '';
-    private $args = [];
-    private $prefix = '';
-    private $triggers = [];
-    private $fields = [];
-
     /**
-     * Construct new link factory.
+     * Get the default arguments.
      *
-     * @param string[] $params A list of required parameters.
-     * @param string[] $args   A list of optional arguments.
-     * @param Factory $factory An optional factory instance.
+     * @return string[] A list of arguments.
      */
-    public function __construct($params, $args = [], $factory = new Factory())
+    protected function getDefaultArgs()
     {
-        $this->factory = $factory;
-        $this->key = Maps::require('key', $params);
-        $this->name = Maps::require('name', $params);
-        $this->args = $this->parseArgs($args);
-        $this->prefix = $this->key . '_' . $this->name;
-        $this->fields = $this->setFields($factory);
+        return [
+            'title' => true,
+            'style' => false,
+            'types' => ['none', 'internal', 'external'],
+        ];
     }
 
     /**
-     * Get the prefix.
+     * Get the list of fields.
      *
-     * @return string
+     * @return AbstractField[]
      */
-    public function getPrefix()
+    protected function getFields()
     {
-        return $this->prefix;
+        return $this->filterFields([
+            'type'     => new Fields\Radio($this->getType()),
+            'title'    => new Fields\Text($this->getTitle()),
+            'style'    => new Fields\Radio($this->getStyle()),
+            'internal' => new Fields\PostObject($this->getInternal()),
+            'external' => new Fields\URL($this->getExternal()),
+            'document' => new Fields\PostObject($this->getDocument()),
+            'email'    => new Fields\Email($this->getEmail()),
+            'anchor'   => new Fields\Text($this->getAnchor()),
+            'archive'  => new Fields\Select($this->getArchive()),
+        ]);
     }
 
     /**
-     * Get post types for internal links.
+     * Filter the field list before merge.
      *
-     * @return string[] A list of post types.
-     */
-    public function getPostTypes()
-    {
-        $args = $this->getArgs();
-        $default = ['post', 'page'];
-
-        return Maps::get('post_types', $args, $defalt);
-    }
-
-    /**
-     * Get the arguments.
-     *
-     * @return string[]
-     */
-    public function getArgs()
-    {
-        return $this->args;
-    }
-
-    /**
-     * Add default arguments to args list.
-     *
-     * @param string[] $args argument list.
-     *
-     * @return string[] updated argument list.
-     */
-    protected function parseArgs($args)
-    {
-        if (Maps::empty('link_title', $args)) {
-            $args['link_title'] = true;
-        }
-
-        if (Maps::empty('style', $args)) {
-            $args['style'] = false;
-        }
-
-        if (Maps::empty('internal_link', $args)) {
-            $args['internal_link'] = true;
-        }
-
-        return $args;
-    }
-
-    /**
-     * Get arguments for a given field.
-     *
-     * @param string $type value to get from args.
-     *
-     * @return string[]
-     */
-    public function getArgsType($type)
-    {
-        return Maps::get($type, $this->getArgs(), []);
-    }
-
-    /**
-     * Set all link fields.
-     *
-     * @param Factory $factory
+     * @param string[] $fields List of fields.
      *
      * @return string[] List of fields.
      */
-    public function setFields($factory)
+    protected function filterFields($fields)
     {
-        $args = $this->getArgs();
+        $args = $this->getSettings();
 
-        $fields[] = $this->addType();
-
-        if ($args['style']) {
-            $fields[] = $this->getStyle();
+        if (!Maps::true('title', $args)) {
+            unset($fields['title']);
         }
 
-        if ($args['link_title']) {
-            $fields[] = $this->getTitle();
-        }
-
-        if ($args['internal_link']) {
-            $fields[] = $this->getInternal();
-        }
-
-        if (isset($args['document'])) {
-            $fields[] = $this->getDocument();
-        }
-
-        if (isset($args['email'])) {
-            $fields[] = $this->getEmail();
-        }
-
-        if (isset($args['trigger'])) {
-            $fields[] = $this->getTriggerFields();
-        }
-
-        if (!isset($args['anchor_disable'])) {
-            $fields[] = $this->getAnchor();
-        }
-
-        $fields[] = $this->getExternal();
-
-        if (isset($args['archive'])) {
-            $fields[] = $this->getArchive();
+        if (!Maps::true('style', $args)) {
+            unset($fields['style']);
         }
 
         return $fields;
-    }
-
-    /**
-     * Add a trigger to the list of triggers.
-     *
-     * @param string $name  trigger event name.
-     * @param string $label description of what is triggered.
-     *
-     * @return void
-     */
-    public function addTrigger($name, $label)
-    {
-        $this->triggers[$name] = $label;
-    }
-
-    /**
-     * Get list of registered triggers.
-     *
-     * @return string[] Map of trigger => description.
-     */
-    public function getTriggers()
-    {
-        return $this->triggers;
     }
 
     /**
@@ -184,59 +77,18 @@ class LinkField implements Fields\AbstractField
      */
     protected function getTypeChoices()
     {
-        $args = $this->getArgs();
+        $args = $this->getSettings();
 
         $types = [
             'none'     => esc_html__('None', 'field-factory'),
             'internal' => esc_html__('Internal', 'field-factory'),
             'external' => esc_html__('External', 'field-factory'),
+            'document' => esc_html__('Document', 'field-factory'),
+            'email'    => esc_html__('E-mail', 'field-factory'),
+            'archive'  => esc_html__('Archive', 'field-factory'),
         ];
 
-        /* override link type labels */
-        if (isset($args['settings']['link_type_labels'])) {
-            $labels = $args['settings']['link_type_labels'];
-
-            foreach ($labels as $k => $label) {
-                if (isset($types[$k])) {
-                    $types[$k] = $label;
-                }
-            }
-        }
-
-        if (!$args['internal_link']) {
-            unset($types['internal']);
-        }
-
-        if (isset($args['document'])) {
-            $types['document'] = esc_html__('Document', 'field-factory');
-        }
-
-        if (isset($args['email'])) {
-            $types['email'] = esc_html__('E-mail', 'field-factory');
-        }
-
-        if (isset($args['archive'])) {
-            $types['archive'] = esc_html__('Archive', 'field-factory');
-        }
-
-        if (isset($args['trigger'])) {
-            $types['trigger'] = esc_html__('Trigger', 'field-factory');
-        }
-
-        return $types;
-    }
-
-    /**
-     * Get list of style choices.
-     *
-     * @return string[] A list of choices.
-     */
-    protected function getStyleChoices()
-    {
-        return [
-            'regular' => esc_html__('Regular', 'field-factory'),
-            'button'  => esc_html__('Button', 'field-factory'),
-        ];
+        return array_intersect_key($types, array_flip($args['types']));
     }
 
     /**
@@ -246,26 +98,24 @@ class LinkField implements Fields\AbstractField
      */
     public function getTypeKey()
     {
-        return $this->prefix . 'link_type';
+        return $this->getKey('type');
     }
 
     /**
-     * Get link type field.
+     * Get the link type arguments.
      *
      * @return string[]
      */
-    protected function addType($factory)
+    protected function getType()
     {
-        $args = [
+        return [
             'key'     => $this->getTypeKey(),
             'label'   => esc_html__('Link', 'field-factory'),
-            'name'    => $this->name . '_link_type',
+            'name'    => $this->getName('type'),
             'instr'   => esc_html__('Select the type of link that you want.', 'field-factory'),
             'choices' => $this->getTypeChoices(),
             'default' => 'none',
-        ]);
-
-        return $factory->radio($this->merge($args, $this->getArgsType('link_type_args'));
+        ];
     }
 
     /**
@@ -275,21 +125,21 @@ class LinkField implements Fields\AbstractField
      */
     protected function getStyle()
     {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '!=', 'none'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '!=', 'none'));
 
-        $fields->radio([
-            'key'     => $this->prefix . 'link_style',
+        return [
+            'key'     => $this->getKey('style'),
             'label'   => esc_html__('Link style', 'field-factory'),
-            'name'    => $this->name . '_link_style',
+            'name'    => $this->getName('style'),
             'instr'   => esc_html__('Select the type of appearance for this link.', 'field-factory'),
-            'choices' => $this->getStyleChoices(),
+            'choices' =>  [
+                'regular' => esc_html__('Regular', 'field-factory'),
+                'button'  => esc_html__('Button', 'field-factory'),
+            ],
             'default' => 'regular',
-            'conds'   => $conds->toArray(),
-        ]);
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_style_args'));
+            'conds'   => $conds,
+        ];
     }
 
     /**
@@ -299,20 +149,17 @@ class LinkField implements Fields\AbstractField
      */
     protected function getTitle()
     {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '!=', 'none'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '!=', 'none'));
 
-        $fields->text([
-            'key'       => $this->prefix . 'link_title',
+        return [
+            'key'       => $this->getKey('title'),
             'label'     => esc_html__('Link title', 'field-factory'),
-            'name'      => $this->name . '_link_title',
+            'name'      => $this->getName('title'),
             'instr'     => esc_html__('Add a custom title.', 'field-factory'),
             'maxlength' => '',
-            'conds'     => $conds->toArray(),
-        ]);
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_title_args'));
+            'conds'     => $conds,
+        ];
     }
 
     /**
@@ -322,22 +169,19 @@ class LinkField implements Fields\AbstractField
      */
     protected function getDocument()
     {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '==', 'document'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'document'));
 
-        $fields->postObject([
-            'key'       => $this->prefix . 'link_doc',
+        return [
+            'key'       => $this->getKey('doc'),
             'label'     => esc_html__('Link to document', 'field-factory'),
-            'name'      => $this->name . '_link_doc',
+            'name'      => $this->getName('doc'),
             'instr'     => esc_html__('Select a link to a document.', 'field-factory'),
-            'conds'     => $conds->toArray(),
+            'conds'     => $conds,
             'post_type' => [
                 '0' => 'attachment',
             ],
-        ]);
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_document_args'));
+        ];
     }
 
     /**
@@ -347,43 +191,16 @@ class LinkField implements Fields\AbstractField
      */
     protected function getEmail()
     {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '==', 'email'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'email'));
 
-        $fields->email([
-            'key'   => $this->prefix . 'link_email',
+        return [
+            'key'   => $this->getKey('email'),
             'label' => esc_html__('E-mail address', 'field-factory'),
-            'name'  => $this->name . '_link_email',
+            'name'  => $this->getName('email'),
             'instr' => esc_html__('Add a recipient e-mail address.', 'field-factory'),
-            'conds' => $conds->toArray(),
-        ]);
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_email_args'));
-    }
-
-    /**
-     * Get fields for all triggers.
-     *
-     * @return string[]
-     */
-    protected function getTriggerFields()
-    {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '==', 'trigger'));
-
-        $fields->select([
-            'key'     => $this->prefix . 'link_trigger',
-            'label'   => esc_html__('Triggers', 'field-factory'),
-            'name'    => $this->name . '_link_trigger',
-            'instr'   => esc_html__('Select a predefined action for this trigger.', 'field-factory'),
-            'choices' => $this->getTriggers(),
-            'default' => '',
-            'conds'   => $conds->toArray(),
-        ]);
-
-        return array_merge($field->getField(0), $this->getArgsType('link_trigger_args'));
+            'conds' => $conds,
+        ];
     }
 
     /**
@@ -393,20 +210,17 @@ class LinkField implements Fields\AbstractField
      */
     protected function getInternal()
     {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '==', 'internal'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'internal'));
 
-        $fields->postObject([
-            'key'       => $this->prefix . 'link_int',
+        return [
+            'key'       => $this->getKey('internal'),
             'label'     => esc_html__('Link to page', 'field-factory'),
-            'name'      => $this->name . '_link_int',
+            'name'      => $this->getName('internal'),
             'instr'     => esc_html__('Select an internal post link.', 'field-factory'),
-            'post_type' => $this->getPostTypes(),
-            'conds'     => $conds->toArray(),
-        ]);
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_internal_args'));
+            'post_type' => ['post', 'page'],
+            'conds'     => $conds,
+        ];
     }
 
     /**
@@ -416,20 +230,17 @@ class LinkField implements Fields\AbstractField
      */
     protected function getAnchor()
     {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '==', 'internal'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'internal'));
 
-        $fields->text([
-            'key'       => $this->prefix . 'link_anchor',
+        return [
+            'key'       => $this->getKey('anchor'),
             'label'     => esc_html__('Link anchor', 'field-factory'),
-            'name'      => $this->name . '_link_anchor',
+            'name'      => $this->getName('anchor'),
             'instr'     => esc_html__('Add an anchor to a specific page section e.g. #section-name.', 'field-factory'),
             'maxlength' => 50,
-            'conds'     => $conds->toArray(),
-        ]);
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_anchor_args'));
+            'conds'     => $conds,
+        ];
     }
 
     /**
@@ -439,25 +250,17 @@ class LinkField implements Fields\AbstractField
      */
     protected function getArchive()
     {
-        $fields = new AcfFactory();
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '==', 'archive'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'archive'));
 
-        $fields->select([
-            'key'   => $this->prefix . 'link_archive',
-            'label' => esc_html__('Link to archive', 'field-factory'),
-            'name'  => $this->name . '_link_archive',
-            'instr' => esc_html__('Select a link to a post archive.', 'field-factory'),
-            'conds' => $conds->toArray(),
-        ]);
-
-        $linkArgs = $this->getArgs();
-
-        if (isset($linkArgs['post_types'])) {
-            $fields['choices'] = $linkArgs['post_types'];
-        }
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_archive_args'));
+        return [
+            'key'     => $this->getKey('archive'),
+            'label'   => esc_html__('Link to archive', 'field-factory'),
+            'name'    => $this->getName('_archive'),
+            'instr'   => esc_html__('Select a link to a post archive.', 'field-factory'),
+            'conds'   => $conds,
+            'choices' => ['post', 'page'],
+        ];
     }
 
     /**
@@ -465,29 +268,17 @@ class LinkField implements Fields\AbstractField
      *
      * @return string[]
      */
-    protected function getExternal($args = [])
+    protected function getExternal()
     {
-        $conds = new AcfConds();
-        $conds->subjoin(new AcfCond($this->getTypeKey(), '==', 'external'));
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'external'));
 
-        $fields->url([
-            'key'   => $this->prefix . 'link_ext',
+        return [
+            'key'   => $this->getKey('external'),
             'label' => esc_html__('Link to page', 'field-factory'),
-            'name'  => $this->name . '_link_ext',
+            'name'  => $this->getName('external'),
             'instr' => esc_html__('Add an external link. Must include http:// or https://.', 'field-factory'),
-            'conds' => $conds->toArray(),
-        ]);
-
-        return array_merge($fields->getField(0), $this->getArgsType('link_external_args'));
-    }
-
-    /**
-     * Get the factory instance.
-     *
-     * @return FieldFactory
-     */
-    protected function getFactory()
-    {
-        return $this->factory;
+            'conds' => $conds,
+        ];
     }
 }
