@@ -5,12 +5,13 @@ namespace Honeymustard\FieldFactory\Fields;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Translator;
 use Honeymustard\FieldFactory\Abilities\Mergable;
+use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
  * Base class for all fields.
  */
-abstract class AbstractField
+abstract class AbstractField implements ArrayableInterface
 {
     use Mergable;
 
