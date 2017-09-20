@@ -72,6 +72,7 @@ abstract class AbstractField
     {
         Maps::require('key', $args);
         Maps::require('name', $args);
+        Maps::require('type', $args);
 
         return $args;
     }
