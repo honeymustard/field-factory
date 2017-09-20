@@ -2,7 +2,7 @@
 
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Groups\Group;
-use Honeymustard\FieldFactory\Library\Links\LinkField;
+use Honeymustard\FieldFactory\Library;
 
 /**
  * Add a library to the factory list.
@@ -13,7 +13,7 @@ use Honeymustard\FieldFactory\Library\Links\LinkField;
  * Values from sub fields can be overidden
  * by using the field name as a key.
  */
-$field = new LinkField([
+$field = new Library\Link([
     'key'   => 'key_1489398392',
     'name'  => 'library_link',
     'types' => ['none', 'internal', 'external', 'email'],

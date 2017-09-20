@@ -3,7 +3,7 @@
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Fields;
 use Honeymustard\FieldFactory\Groups\Group;
-use Honeymustard\FieldFactory\Library\Links\LinkField;
+use Honeymustard\FieldFactory\Library;
 
 $group = new Group([
     'key'    => 'key_1489398000',
@@ -19,7 +19,7 @@ $group = new Group([
             'name'  => 'title',
             'label' => 'Add a title',
         ]),
-        new LinkField([
+        new Library\Link([
             'key'   => 'key_1489398003',
             'name'  => 'library_link',
             'type'  => [

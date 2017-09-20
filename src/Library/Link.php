@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeymustard\FieldFactory\Library\Links;
+namespace Honeymustard\FieldFactory\Library;
 
 use Honeymustard\FieldFactory\Fields;
 use Honeymustard\FieldFactory\Factory;
@@ -12,7 +12,7 @@ use Honeymustard\FieldFactory\Library\AbstractLibrary;
 /**
  * A link field implementation.
  */
-class LinkField extends AbstractLibrary
+class Link extends AbstractLibrary
 {
     /**
      * Get the default arguments.
