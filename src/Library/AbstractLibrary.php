@@ -145,6 +145,8 @@ abstract class AbstractLibrary implements ArrayableInterface
      */
     final public function toArray()
     {
-        return $this->parse([$this->getFields(), $this->getFieldArgs()]);
+        return array_values(
+            $this->parse([$this->getFields(), $this->getFieldArgs()])
+        );
     }
 }
