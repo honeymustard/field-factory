@@ -5,7 +5,7 @@ namespace Honeymustard\FieldFactory\Groups;
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Translator;
-use Honeymustard\FieldFactory\Abilities\Mergable;
+use Honeymustard\FieldFactory\Abilities\MergableTrait;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
@@ -13,7 +13,7 @@ use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
  */
 abstract class AbstractGroup
 {
-    use Mergable;
+    use MergableTrait;
 
     private $args = [];
     private $translator = null;

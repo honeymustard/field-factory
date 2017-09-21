@@ -7,7 +7,7 @@ use Honeymustard\FieldFactory\Utils\Converter;
 /**
  * Enables an object to merge field arguments.
  */
-trait Mergable
+trait MergableTrait
 {
     /**
      * Verify a list of arguments.

@@ -5,7 +5,7 @@ namespace Honeymustard\FieldFactory\Library;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Keymaker;
 use Honeymustard\FieldFactory\Utils\Translator;
-use Honeymustard\FieldFactory\Abilities\Mergable;
+use Honeymustard\FieldFactory\Abilities\MergableTrait;
 use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
@@ -14,7 +14,7 @@ use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
  */
 abstract class AbstractLibrary implements ArrayableInterface
 {
-    use Mergable;
+    use MergableTrait;
 
     private $args = [];
     private $keymaker = null;

@@ -4,7 +4,7 @@ namespace Honeymustard\FieldFactory\Fields;
 
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Translator;
-use Honeymustard\FieldFactory\Abilities\Mergable;
+use Honeymustard\FieldFactory\Abilities\MergableTrait;
 use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
@@ -13,7 +13,7 @@ use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
  */
 abstract class AbstractField implements ArrayableInterface
 {
-    use Mergable;
+    use MergableTrait;
 
     private $type = '';
     private $args = [];
