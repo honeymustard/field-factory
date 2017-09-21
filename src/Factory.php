@@ -7,7 +7,7 @@ use Honeymustard\FieldFactory\Fields\AbstractField;
 use Honeymustard\FieldFactory\Collections\FieldList;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Converter;
-use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
+use Honeymustard\FieldFactory\Interfaces\FieldInterface;
 use Honeymustard\FieldFactory\Library\AbstractLibrary;
 
 /**
@@ -46,7 +46,7 @@ class Factory
     /**
      * Get the list of fields.
      *
-     * @return Arrayable[]
+     * @return FieldInterface[]
      */
     public function getFields()
     {
@@ -66,11 +66,11 @@ class Factory
     /**
      * Append a field to the factory list.
      *
-     * @param Arrayable $field A valid field type.
+     * @param FieldInterface $field A valid field type.
      *
      * @return Factory
      */
-    public function append(ArrayableInterface $field)
+    public function append(FieldInterface $field)
     {
         $list = $this->getList();
 

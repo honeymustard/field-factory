@@ -6,13 +6,14 @@ use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Keymaker;
 use Honeymustard\FieldFactory\Utils\Translator;
 use Honeymustard\FieldFactory\Abilities\MergableTrait;
+use Honeymustard\FieldFactory\Interfaces\FieldInterface;
 use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
 use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
 
 /**
  * Base class for all libraries.
  */
-abstract class AbstractLibrary implements ArrayableInterface
+abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
 {
     use MergableTrait;
 
