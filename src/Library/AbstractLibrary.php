@@ -105,7 +105,7 @@ abstract class AbstractLibrary implements ArrayableInterface
         $default = $this->getDefaultArgs();
         $applied = array_intersect_key($this->getArgs(), $default);
 
-        return array_replace_recursive($default, $applied);
+        return array_merge($default, $applied);
     }
 
     /**
