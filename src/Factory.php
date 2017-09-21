@@ -4,7 +4,7 @@ namespace Honeymustard\FieldFactory;
 
 use Honeymustard\FieldFactory\Fields;
 use Honeymustard\FieldFactory\Fields\AbstractField;
-use Honeymustard\FieldFactory\Collections\FieldList;
+use Honeymustard\FieldFactory\Collections\GenericList;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Converter;
 use Honeymustard\FieldFactory\Interfaces\FieldInterface;
@@ -20,11 +20,11 @@ class Factory
     /**
      * Construct a new factory.
      *
-     * @param AbstractField[] $fields Initial list of fields.
+     * @param FieldInterface[] $fields Initial list of fields.
      */
     public function __construct($fields = [])
     {
-        $this->list = new FieldList();
+        $this->list = new GenericList();
 
         if (!empty($fields)) {
             foreach ($fields as $field) {
@@ -56,7 +56,7 @@ class Factory
     /**
      * Get the field list.
      *
-     * @return FieldList
+     * @return GenericList
      */
     protected function getList()
     {
