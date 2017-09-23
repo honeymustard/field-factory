@@ -47,6 +47,7 @@ use Honeymustard\FieldFactory\Assemblers\CommonLink;
 
 $link = CommonLink::assemble('link');
 echo $link->url;
+echo $link->title;
 ```
 
 ## Testing
