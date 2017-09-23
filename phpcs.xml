@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="Field-Factory">
+    <file>./src</file>
+    <rule ref="PSR2"/>
+    <arg name="report-width" value="100"/>
+    <arg name="colors"/>
+</ruleset>
