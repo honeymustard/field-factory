@@ -3,23 +3,22 @@
 declare(strict_types = 1);
 
 use PHPUnit\Framework\TestCase;
-use Honeymustard\FieldFactory;
+use Honeymustard\FieldFactory\Factory;
 
 /**
- * @covers FieldFactory
+ * @covers Factory
  */
 final class FactoryTest extends TestCase
 {
     public function testNewFactoryShouldBeEmpty()
     {
-        $fact = new FieldFactory\Factory();
+        $fact = new Factory();
         $this->assertEquals($fact->length(), 0);
     }
 
     public function testLengthWithOneField()
     {
-        $fact = new FieldFactory\Factory();
-
+        $fact = new Factory();
         $fact->email([
             'key'  => 'text_key',
             'name' => 'text_name'
@@ -30,8 +29,7 @@ final class FactoryTest extends TestCase
 
     public function testLengthWithTwoFields()
     {
-        $fact = new FieldFactory\Factory();
-
+        $fact = new Factory();
         $fact->tab([
             'key'  => 'text_key_1',
             'name' => 'text_name_2'
