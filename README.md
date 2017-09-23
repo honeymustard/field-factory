@@ -36,6 +36,12 @@ $group = new Group([
 $group->register();
 ```
 
+## Testing
+Run codesniffer and unit tests.
+```
+$ composer test
+```
+
 ## Copyright
 Licensed under the MIT license (MIT).  
 Copyright &copy; 2017 Adrian Solumsmo.
