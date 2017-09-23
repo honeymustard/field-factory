@@ -2,7 +2,7 @@
 
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Groups\Group;
-use Honeymustard\FieldFactory\Library;
+use Honeymustard\FieldFactory\Library\CommonLink;
 
 /**
  * Add a library to the factory list.
@@ -13,7 +13,7 @@ use Honeymustard\FieldFactory\Library;
  * Values from sub fields can be overidden
  * by using the field name as a key.
  */
-$field = new Library\Link([
+$field = new CommonLink([
     'key'   => 'key_1489398392',
     'name'  => 'library_link',
     'types' => ['none', 'internal', 'external', 'email'],

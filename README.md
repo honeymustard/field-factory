@@ -8,7 +8,7 @@ A facade library for Advanced Custom Fields.
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Fields;
 use Honeymustard\FieldFactory\Groups\Group;
-use Honeymustard\FieldFactory\Library;
+use Honeymustard\FieldFactory\Library\CommonLink;
 
 $group = new Group([
     'key'    => 'key_1489398000',
@@ -24,7 +24,7 @@ $group = new Group([
             'name'  => 'title',
             'label' => 'Add a title',
         ]),
-        new Library\Link([
+        new CommonLink([
             'key'   => 'key_1489398003',
             'name'  => 'link',
             'type'  => [

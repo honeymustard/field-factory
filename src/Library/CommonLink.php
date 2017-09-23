@@ -12,7 +12,7 @@ use Honeymustard\FieldFactory\Library\AbstractLibrary;
 /**
  * A link field implementation.
  */
-class Link extends AbstractLibrary
+class CommonLink extends AbstractLibrary
 {
     /**
      * Get the default arguments.
