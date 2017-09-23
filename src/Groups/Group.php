@@ -27,8 +27,8 @@ class Group extends AbstractGroup
      *
      * @return CondsList
      */
-    public function getLocations() {
-
+    public function getLocations()
+    {
         $conds = new CondsList();
         $conds->subjoin(new Param('post_type', '==', 'post'));
         $conds->subjoin(new Param('post_type', '==', 'page'));

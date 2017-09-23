@@ -22,7 +22,7 @@ final class Converter
             foreach ($list as $k => $v) {
                 if (is_array($v)) {
                     $temp[$k] = self::toArray($v);
-                } else if(is_object($v)) {
+                } elseif (is_object($v)) {
                     $temp[$k] = self::toArray($v->toArray());
                 } else {
                     $temp[$k] = $v;
