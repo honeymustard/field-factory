@@ -8,7 +8,7 @@ namespace Honeymustard\FieldFactory\Utils;
 class URL
 {
     /**
-     * Remove pound sign from anchor.
+     * Remove pound sign and undesired characters.
      *
      * @param string $anchor Anchor to be filtered.
      *
@@ -16,7 +16,7 @@ class URL
      */
     public static function filterAnchor($anchor)
     {
-        return str_replace('#', '', $anchor);
+        return sanitize_title(str_replace('#', '', $anchor));
     }
 
     /**
