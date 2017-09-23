@@ -3,7 +3,7 @@
 A facade library for Advanced Custom Fields.
 
 ## An example
-```
+```php
 use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Fields;
 use Honeymustard\FieldFactory\Groups\Group;
