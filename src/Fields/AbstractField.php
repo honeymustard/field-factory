@@ -98,9 +98,19 @@ abstract class AbstractField implements FieldInterface, ArrayableInterface
      *
      * @return string
      */
-    public function getType()
+    final public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Get the identity.
+     *
+     * @return string
+     */
+    final public function getIdentity()
+    {
+        return 'field';
     }
 
     /**

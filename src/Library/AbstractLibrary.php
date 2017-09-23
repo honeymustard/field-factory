@@ -53,7 +53,7 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
      *
      * @return string
      */
-    protected function getKey($key)
+    final protected function getKey($key)
     {
         return $this->getKeymaker()->getKey($key);
     }
@@ -65,7 +65,7 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
      *
      * @return string
      */
-    protected function getName($name)
+    final protected function getName($name)
     {
         return $this->getKeymaker()->getName($name);
     }
@@ -101,7 +101,7 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
      *
      * @return string[]
      */
-    protected function getSettings()
+    final protected function getSettings()
     {
         $default = $this->getDefaultArgs();
         $applied = array_intersect_key($this->getArgs(), $default);
@@ -114,9 +114,19 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
      *
      * @return string[]
      */
-    protected function getFieldArgs()
+    final protected function getFieldArgs()
     {
         return array_intersect_key($this->getArgs(), $this->getFields());
+    }
+
+    /**
+     * Get the identity.
+     *
+     * @return string
+     */
+    final public function getIdentity()
+    {
+        return 'library';
     }
 
     /**

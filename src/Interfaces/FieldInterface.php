@@ -8,6 +8,13 @@ namespace Honeymustard\FieldFactory\Interfaces;
 interface FieldInterface
 {
     /**
+     * Get the identity.
+     *
+     * @return string
+     */
+    public function getIdentity();
+
+    /**
      * Get the translator.
      *
      * @return Translator

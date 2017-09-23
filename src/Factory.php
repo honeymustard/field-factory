@@ -74,7 +74,7 @@ class Factory
     {
         $list = $this->getList();
 
-        if ($field instanceof AbstractLibrary) {
+        if ($field->getIdentity() === 'library') {
             $items = $field->toArray();
 
             foreach ($items as $item) {
