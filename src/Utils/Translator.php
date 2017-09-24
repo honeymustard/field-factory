@@ -2,7 +2,7 @@
 
 namespace Honeymustard\FieldFactory\Utils;
 
-use Honeymustard\FieldFactory\Dictionaries\AbstractDictionary;
+use Honeymustard\FieldFactory\Interfaces\DictionaryInterface;
 
 /**
  * Controls translation of field arguments.
@@ -14,21 +14,21 @@ class Translator
     /**
      * Contruct a new translator.
      *
-     * @param AbstractDictionary $dictionary
+     * @param DictionaryInterface $dictionary
      */
-    public function __construct(AbstractDictionary $dictionary)
+    public function __construct(DictionaryInterface $dictionary)
     {
         $this->dictionary = $dictionary;
     }
 
     /**
-     * Translate a given alias in a list.
+     * Replace an alias in a list.
      *
-     * @param string $alias  A key alias.
-     * @param string $name   Original acf key name.
-     * @param string[] $args A list of field values.
+     * @param string $alias  An alias.
+     * @param string $name   The translation name.
+     * @param string[] $args A list of arguments.
      *
-     * @return string[] translated list.
+     * @return string[] Translated list.
      */
     public function replace($alias, $name, $args)
     {
@@ -62,7 +62,7 @@ class Translator
     /**
      * Get the dictionary.
      *
-     * @return AbstractDictionary
+     * @return DictionaryInterface
      */
     public function getDictionary()
     {

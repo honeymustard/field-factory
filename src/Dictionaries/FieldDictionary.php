@@ -2,10 +2,12 @@
 
 namespace Honeymustard\FieldFactory\Dictionaries;
 
+use Honeymustard\FieldFactory\Interfaces\DictionaryInterface;
+
 /**
  * Dictionary for translations between terms.
  */
-class FieldDictionary extends AbstractDictionary
+class FieldDictionary implements DictionaryInterface
 {
     public function getMap()
     {
