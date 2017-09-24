@@ -2,10 +2,12 @@
 
 namespace Honeymustard\FieldFactory\Conds;
 
+use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
+
 /**
  * Base class for a all conditionals.
  */
-abstract class AbstractCond
+abstract class AbstractCond implements ArrayableInterface
 {
     protected $key = '';
     protected $operator = '';
@@ -54,11 +56,4 @@ abstract class AbstractCond
     {
         return $this->value;
     }
-
-    /**
-     * Get the conditionals map as an array.
-     *
-     * @return string[]
-     */
-    abstract public function toArray();
 }

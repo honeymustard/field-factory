@@ -5,10 +5,11 @@ namespace Honeymustard\FieldFactory\Conds;
 /**
  * Class for a single parameter.
  */
-class Param extends AbstractCond
+final class Param extends AbstractCond
 {
     /**
      * Implements abstract method toArray.
+     *
      * @override
      */
     public function toArray()
