@@ -3,11 +3,12 @@
 namespace Honeymustard\FieldFactory\Collections;
 
 use Honeymustard\FieldFactory\Conds\AbstractCond;
+use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
 
 /**
  * Class to handle lists of conditionals.
  */
-class CondsList extends AbstractList
+class CondsList extends AbstractList implements ArrayableInterface
 {
     /**
      * Set the initial list.
