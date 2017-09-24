@@ -9,9 +9,9 @@ use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
  */
 abstract class AbstractCond implements ArrayableInterface
 {
-    protected $key = '';
-    protected $operator = '';
-    protected $value = '';
+    private $key = '';
+    private $operator = '';
+    private $value = '';
 
     /**
      * Initiate a new condition.
