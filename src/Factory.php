@@ -143,6 +143,8 @@ class Factory
                 return new Fields\User($args);
             case 'wysiwyg':
                 return new Fields\Wysiwyg($args);
+            case 'password':
+                return new Fields\Password($args);
             default:
                 return new Fields\Unknown($args);
         }
@@ -388,5 +390,15 @@ class Factory
     public function googleMap($args)
     {
         return $this->append(new Fields\GoogleMap($args));
+    }
+
+    /**
+     * Generate a new password field.
+     *
+     * @return Factory
+     */
+    public function password($args)
+    {
+        return $this->append(new Fields\Password($args));
     }
 }
