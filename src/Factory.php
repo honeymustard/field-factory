@@ -147,6 +147,8 @@ class Factory
                 return new Fields\Password($args);
             case 'gallery':
                 return new Fields\Gallery($args);
+            case 'page_link':
+                return new Fields\PageLink($args);
             default:
                 return new Fields\Unknown($args);
         }
@@ -412,5 +414,15 @@ class Factory
     public function gallery($args)
     {
         return $this->append(new Fields\Gallery($args));
+    }
+
+    /**
+     * Generate a new page link field.
+     *
+     * @return Factory
+     */
+    public function pageLink($args)
+    {
+        return $this->append(new Fields\PageLink($args));
     }
 }
