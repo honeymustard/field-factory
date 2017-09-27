@@ -145,6 +145,8 @@ class Factory
                 return new Fields\Wysiwyg($args);
             case 'password':
                 return new Fields\Password($args);
+            case 'gallery':
+                return new Fields\Gallery($args);
             default:
                 return new Fields\Unknown($args);
         }
@@ -400,5 +402,15 @@ class Factory
     public function password($args)
     {
         return $this->append(new Fields\Password($args));
+    }
+
+    /**
+     * Generate a new gallery field.
+     *
+     * @return Factory
+     */
+    public function gallery($args)
+    {
+        return $this->append(new Fields\Gallery($args));
     }
 }
