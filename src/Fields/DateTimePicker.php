@@ -25,9 +25,9 @@ class DateTimePicker extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'display_format' => 'd/m/Y H:i',
-            'return_format'  => 'U',
-            'first_day'      => 1,
+            'display'   => 'd/m/Y H:i',
+            'return'    => 'U',
+            'first_day' => 1,
         ];
     }
 }

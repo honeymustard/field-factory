@@ -25,16 +25,16 @@ class Image extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'return_format' => 'array',
-            'preview_size'  => 'thumbnail',
-            'library'       => 'all',
-            'min_width'     => '',
-            'min_height'    => '',
-            'min_size'      => '',
-            'max_width'     => '',
-            'max_height'    => '',
-            'max_size'      => '',
-            'mime_types'    => '',
+            'return'       => 'array',
+            'preview_size' => 'thumbnail',
+            'library'      => 'all',
+            'min_width'    => '',
+            'min_height'   => '',
+            'min_size'     => '',
+            'max_width'    => '',
+            'max_height'   => '',
+            'max_size'     => '',
+            'mime_types'   => '',
         ];
     }
 }

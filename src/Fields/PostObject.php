@@ -25,12 +25,12 @@ class PostObject extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'post_type'     => [],
-            'taxonomy'      => [],
-            'allow_null'    => 0,
-            'multiple'      => 0,
-            'return_format' => 'id',
-            'ui'            => 1,
+            'post_type'  => [],
+            'taxonomy'   => [],
+            'allow_null' => 0,
+            'multiple'   => 0,
+            'return'     => 'id',
+            'ui'         => 1,
         ];
     }
 }

@@ -21,6 +21,8 @@ class FieldDictionary implements DictionaryInterface
             'subs'    => 'sub_fields',
             'the_oc'  => 'other_choice',
             'save_oc' => 'save_other_choice',
+            'return'  => 'return_format',
+            'display' => 'display_format',
         ];
     }
 }

@@ -25,15 +25,15 @@ class URL extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'choices'       => [],
-            'allow_null'    => 0,
-            'the_oc'        => 0,
-            'save_the_oc'   => 0,
-            'default'       => '',
-            'layout'        => 'horizontal',
-            'return_format' => 'value',
-            'default'       => '',
-            'placeholder'   => '',
+            'choices'     => [],
+            'allow_null'  => 0,
+            'the_oc'      => 0,
+            'save_the_oc' => 0,
+            'default'     => '',
+            'layout'      => 'horizontal',
+            'returnt'     => 'value',
+            'default'     => '',
+            'placeholder' => '',
         ];
     }
 }

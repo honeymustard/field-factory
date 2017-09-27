@@ -25,11 +25,11 @@ class Checkbox extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'choices'       => [],
-            'default'       => '',
-            'layout'        => 'horizontal',
-            'toggle'        => 1,
-            'return_format' => 'value',
+            'choices' => [],
+            'default' => '',
+            'layout'  => 'horizontal',
+            'toggle'  => 1,
+            'return'  => 'value',
         ];
     }
 }

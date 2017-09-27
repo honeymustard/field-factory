@@ -25,13 +25,13 @@ class Relationship extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'post_type'     => [],
-            'taxonomy'      => [],
-            'elements'      => '',
-            'min'           => '',
-            'max'           => '',
-            'return_format' => 'id',
-            'filters'       => [
+            'post_type' => [],
+            'taxonomy'  => [],
+            'elements'  => '',
+            'min'       => '',
+            'max'       => '',
+            'return'    => 'id',
+            'filters'   => [
                 0 => 'search',
                 1 => 'post_type',
                 2 => 'taxonomy',

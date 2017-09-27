@@ -25,13 +25,13 @@ class Radio extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'choices'       => [],
-            'allow_null'    => 0,
-            'the_oc'        => 0,
-            'save_the_oc'   => 0,
-            'default'       => '',
-            'layout'        => 'horizontal',
-            'return_format' => 'value',
+            'choices'     => [],
+            'allow_null'  => 0,
+            'the_oc'      => 0,
+            'save_the_oc' => 0,
+            'default'     => '',
+            'layout'      => 'horizontal',
+            'return'      => 'value',
         ];
     }
 }

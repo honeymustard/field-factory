@@ -25,14 +25,14 @@ class Select extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'choices'       => [],
-            'default'       => [],
-            'allow_null'    => 0,
-            'multiple'      => 0,
-            'ui'            => 0,
-            'ajax'          => 0,
-            'return_format' => 'value',
-            'placeholder'   => '',
+            'choices'     => [],
+            'default'     => [],
+            'allow_null'  => 0,
+            'multiple'    => 0,
+            'ui'          => 0,
+            'ajax'        => 0,
+            'return'      => 'value',
+            'placeholder' => '',
         ];
     }
 }

@@ -25,11 +25,11 @@ class File extends AbstractField
     protected function getFieldArgs()
     {
         return [
-            'return_format' => 'id',
-            'library'       => 'all',
-            'min_size'      => '',
-            'max_size'      => '',
-            'mime_types'    => '',
+            'return'     => 'id',
+            'library'    => 'all',
+            'min_size'   => '',
+            'max_size'   => '',
+            'mime_types' => '',
         ];
     }
 }
