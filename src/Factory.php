@@ -149,6 +149,8 @@ class Factory
                 return new Fields\Gallery($args);
             case 'page_link':
                 return new Fields\PageLink($args);
+            case 'taxonomy':
+                return new Fields\Taxonomy($args);
             default:
                 return new Fields\Unknown($args);
         }
@@ -424,5 +426,15 @@ class Factory
     public function pageLink($args)
     {
         return $this->append(new Fields\PageLink($args));
+    }
+
+    /**
+     * Generate a new taxonomy field.
+     *
+     * @return Factory
+     */
+    public function taxonomy($args)
+    {
+        return $this->append(new Fields\Taxonomy($args));
     }
 }
