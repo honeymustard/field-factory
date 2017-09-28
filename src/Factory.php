@@ -151,6 +151,8 @@ class Factory
                 return new Fields\PageLink($args);
             case 'taxonomy':
                 return new Fields\Taxonomy($args);
+            case 'date_picker':
+                return new Fields\DatePicker($args);
             default:
                 return new Fields\Unknown($args);
         }
@@ -369,7 +371,7 @@ class Factory
     }
 
     /**
-     * Generate a new user selection field.
+     * Generate a new user field.
      *
      * @return Factory
      */
@@ -436,5 +438,15 @@ class Factory
     public function taxonomy($args)
     {
         return $this->append(new Fields\Taxonomy($args));
+    }
+
+    /**
+     * Generate a new date picker field.
+     *
+     * @return Factory
+     */
+    public function datePicker($args)
+    {
+        return $this->append(new Fields\DatePicker($args));
     }
 }
