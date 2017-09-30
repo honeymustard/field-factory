@@ -155,6 +155,8 @@ class Factory
                 return new Fields\DatePicker($args);
             case 'time_picker':
                 return new Fields\TimePicker($args);
+            case 'clone':
+                return new Fields\CloneField($args);
             default:
                 return new Fields\Unknown($args);
         }
@@ -460,5 +462,15 @@ class Factory
     public function timePicker($args)
     {
         return $this->append(new Fields\TimePicker($args));
+    }
+
+    /**
+     * Generate a new clone field.
+     *
+     * @return Factory
+     */
+    public function clone($args)
+    {
+        return $this->append(new Fields\CloneField($args));
     }
 }
