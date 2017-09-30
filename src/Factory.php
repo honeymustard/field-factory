@@ -153,6 +153,8 @@ class Factory
                 return new Fields\Taxonomy($args);
             case 'date_picker':
                 return new Fields\DatePicker($args);
+            case 'time_picker':
+                return new Fields\TimePicker($args);
             default:
                 return new Fields\Unknown($args);
         }
@@ -448,5 +450,15 @@ class Factory
     public function datePicker($args)
     {
         return $this->append(new Fields\DatePicker($args));
+    }
+
+    /**
+     * Generate a new time picker field.
+     *
+     * @return Factory
+     */
+    public function timePicker($args)
+    {
+        return $this->append(new Fields\TimePicker($args));
     }
 }
