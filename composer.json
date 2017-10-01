@@ -14,7 +14,10 @@
             "email": "adrian.solumsmo@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "symfony/translation": "^3.3",
+        "symfony/yaml": "^3.3"
+    },
     "autoload": {
         "psr-4": {
             "Honeymustard\\FieldFactory\\": "src"
