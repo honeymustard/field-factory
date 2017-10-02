@@ -5,6 +5,7 @@ namespace Honeymustard\FieldFactory\Library;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Keymaker;
 use Honeymustard\FieldFactory\Utils\Translator;
+use Honeymustard\FieldFactory\Utils\Locale;
 use Honeymustard\FieldFactory\Abilities\MergableTrait;
 use Honeymustard\FieldFactory\Interfaces\FieldInterface;
 use Honeymustard\FieldFactory\Interfaces\ArrayableInterface;
@@ -20,6 +21,7 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
     private $args = [];
     private $keymaker = null;
     private $translator = null;
+    private $locale = null;
 
     /**
      * Construct new library.
@@ -34,6 +36,18 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
         $this->args = $args;
         $this->keymaker = new Keymaker($key, $name);
         $this->translator = new Translator(new FieldDictionary());
+        $this->locale = new Locale();
+        $this->locale->addResources($this->getTranslations());
+    }
+
+    /**
+     * Get the translations map.
+     *
+     * @return string[] A map of translation files.
+     */
+    protected function getTranslations()
+    {
+        return [];
     }
 
     /**
@@ -127,6 +141,16 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
     final public function getIdentity()
     {
         return 'library';
+    }
+
+    /**
+     * Get the locale object.
+     *
+     * @return Locale
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 
     /**
