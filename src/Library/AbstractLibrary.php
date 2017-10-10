@@ -134,6 +134,18 @@ abstract class AbstractLibrary implements FieldInterface, ArrayableInterface
     }
 
     /**
+     * Localize a given string.
+     *
+     * @param string $string A string to localize.
+     *
+     * @return string
+     */
+    protected function localize($string)
+    {
+        return $this->getLocale()->trans($string);
+    }
+
+    /**
      * Get the identity.
      *
      * @return string
