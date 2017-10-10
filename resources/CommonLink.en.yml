@@ -1,0 +1,38 @@
+misc:
+    regular: Regular
+    button: Button
+type:
+    none: None
+    internal: Internal
+    external: External
+    document: Document
+    email: E-mail
+    archive: Archive
+field:
+    type:
+        label: Link
+        instr: Select the type of link
+    style:
+        label: Link appearance
+        instr: Select the type of appearance
+    title:
+        label: Link title
+        instr: Add a custom title
+    document:
+        label: Link to a document
+        instr: Select a document from the list
+    email:
+        label: Link to an e-mail
+        instr: Add an e-mail address for the recipient
+    internal:
+        label: Link to a post
+        instr: Select a post from the list
+    external:
+        label: Link to an external page
+        instr: Add a url with http:// or https://
+    anchor:
+        label: Link to a section
+        instr: 'Add an anchor to a section e.g. #section'
+    archive:
+        label: Link to an archive
+        instr: Select an archive from the list

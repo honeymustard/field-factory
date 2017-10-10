@@ -1,0 +1,38 @@
+misc:
+    regular: Vanlig
+    button: Knapp
+type:
+    none: Ingen
+    internal: Intern
+    external: Ekstern
+    document: Dokument
+    email: E-post
+    archive: Arkiv
+field:
+    type:
+        label: Lenke
+        instr: Velg hva slags lenke du vil ha
+    style:
+        label: Lenke utseende
+        instr: Velg hva slags utseende du vil ha
+    title:
+        label: Tittel for lenke
+        instr: Legg til en egendefinert tittel
+    document:
+        label: Lenke til et dokument
+        instr: Velg et dokument fra listen
+    email:
+        label: Lenke til en e-post
+        instr: Legg til e-postadresse for mottaker
+    internal:
+        label: Lenke til et innlegg
+        instr: Velg et innlegg fra listen
+    external:
+        label: Lenke til en ekstern side
+        instr: Legg til en lenke med http:// eller https://
+    anchor:
+        label: Lenke til en seksjon
+        instr: 'Legg til navnet på en seksjon. f.eks. #seksjon'
+    archive:
+        label: Lenke til et arkiv
+        instr: Velg et arkiv fra listen
