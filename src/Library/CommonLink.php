@@ -7,6 +7,7 @@ use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Collections\CondsList;
 use Honeymustard\FieldFactory\Conds\Cond;
 use Honeymustard\FieldFactory\Utils\Maps;
+use Honeymustard\FieldFactory\Utils\Paths;
 use Honeymustard\FieldFactory\Library\AbstractLibrary;
 
 /**
@@ -14,6 +15,19 @@ use Honeymustard\FieldFactory\Library\AbstractLibrary;
  */
 class CommonLink extends AbstractLibrary
 {
+    /**
+     * Get the translations map.
+     *
+     * @return string[] A map of translation files.
+     */
+    protected function getTranslations()
+    {
+        return [
+            'en_US' => Paths::resource('CommonLink.en.yml'),
+            'nb_NO' => Paths::resource('CommonLink.no.yml'),
+        ];
+    }
+
     /**
      * Get the default arguments.
      *
@@ -80,12 +94,12 @@ class CommonLink extends AbstractLibrary
         $args = $this->getSettings();
 
         $types = [
-            'none'     => esc_html__('None', 'field-factory'),
-            'internal' => esc_html__('Internal', 'field-factory'),
-            'external' => esc_html__('External', 'field-factory'),
-            'document' => esc_html__('Document', 'field-factory'),
-            'email'    => esc_html__('E-mail', 'field-factory'),
-            'archive'  => esc_html__('Archive', 'field-factory'),
+            'none'     => $this->localize('type.none'),
+            'internal' => $this->localize('type.internal'),
+            'external' => $this->localize('type.external'),
+            'document' => $this->localize('type.document'),
+            'email'    => $this->localize('type.email'),
+            'archive'  => $this->localize('type.archive'),
         ];
 
         return array_intersect_key($types, array_flip($args['types']));
@@ -110,9 +124,9 @@ class CommonLink extends AbstractLibrary
     {
         return [
             'key'     => $this->getTypeKey(),
-            'label'   => esc_html__('Link', 'field-factory'),
+            'label'   => $this->localize('field.type.label'),
             'name'    => $this->getName('type'),
-            'instr'   => esc_html__('Select the type of link that you want.', 'field-factory'),
+            'instr'   => $this->localize('field.type.instr'),
             'choices' => $this->getTypeChoices(),
             'default' => 'none',
         ];
@@ -130,12 +144,12 @@ class CommonLink extends AbstractLibrary
 
         return [
             'key'     => $this->getKey('style'),
-            'label'   => esc_html__('Link style', 'field-factory'),
+            'label'   => $this->localize('field.style.label'),
             'name'    => $this->getName('style'),
-            'instr'   => esc_html__('Select the type of appearance for this link.', 'field-factory'),
+            'instr'   => $this->localize('field.style.instr'),
             'choices' =>  [
-                'regular' => esc_html__('Regular', 'field-factory'),
-                'button'  => esc_html__('Button', 'field-factory'),
+                'regular' => $this->localize('misc.regular'),
+                'button'  => $this->localize('misc.button'),
             ],
             'default' => 'regular',
             'conds'   => $conds,
@@ -154,10 +168,9 @@ class CommonLink extends AbstractLibrary
 
         return [
             'key'       => $this->getKey('title'),
-            'label'     => esc_html__('Link title', 'field-factory'),
+            'label'     => $this->localize('field.title.label'),
             'name'      => $this->getName('title'),
-            'instr'     => esc_html__('Add a custom title.', 'field-factory'),
-            'maxlength' => '',
+            'instr'     => $this->localize('field.title.instr'),
             'conds'     => $conds,
         ];
     }
@@ -174,9 +187,9 @@ class CommonLink extends AbstractLibrary
 
         return [
             'key'       => $this->getKey('doc'),
-            'label'     => esc_html__('Link to document', 'field-factory'),
+            'label'     => $this->localize('field.document.label'),
             'name'      => $this->getName('doc'),
-            'instr'     => esc_html__('Select a link to a document.', 'field-factory'),
+            'instr'     => $this->localize('field.document.instr'),
             'conds'     => $conds,
             'post_type' => [
                 '0' => 'attachment',
@@ -196,9 +209,9 @@ class CommonLink extends AbstractLibrary
 
         return [
             'key'   => $this->getKey('email'),
-            'label' => esc_html__('E-mail address', 'field-factory'),
+            'label' => $this->localize('field.email.label'),
             'name'  => $this->getName('email'),
-            'instr' => esc_html__('Add a recipient e-mail address.', 'field-factory'),
+            'instr' => $this->localize('field.email.instr'),
             'conds' => $conds,
         ];
     }
@@ -215,11 +228,30 @@ class CommonLink extends AbstractLibrary
 
         return [
             'key'       => $this->getKey('internal'),
-            'label'     => esc_html__('Link to page', 'field-factory'),
+            'label'     => $this->localize('field.internal.label'),
             'name'      => $this->getName('internal'),
-            'instr'     => esc_html__('Select an internal post link.', 'field-factory'),
+            'instr'     => $this->localize('field.internal.instr'),
             'post_type' => ['post', 'page'],
             'conds'     => $conds,
+        ];
+    }
+
+    /**
+     * Get external link url field.
+     *
+     * @return string[]
+     */
+    protected function getExternal()
+    {
+        $conds = new CondsList();
+        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'external'));
+
+        return [
+            'key'   => $this->getKey('external'),
+            'label' => $this->localize('field.external.label'),
+            'name'  => $this->getName('external'),
+            'instr' => $this->localize('field.external.instr'),
+            'conds' => $conds,
         ];
     }
 
@@ -235,9 +267,9 @@ class CommonLink extends AbstractLibrary
 
         return [
             'key'       => $this->getKey('anchor'),
-            'label'     => esc_html__('Link anchor', 'field-factory'),
+            'label'     => $this->localize('field.anchor.label'),
             'name'      => $this->getName('anchor'),
-            'instr'     => esc_html__('Add an anchor to a specific page section e.g. #section-name.', 'field-factory'),
+            'instr'     => $this->localize('field.anchor.instr'),
             'maxlength' => 50,
             'conds'     => $conds,
         ];
@@ -255,30 +287,11 @@ class CommonLink extends AbstractLibrary
 
         return [
             'key'     => $this->getKey('archive'),
-            'label'   => esc_html__('Link to archive', 'field-factory'),
-            'name'    => $this->getName('_archive'),
-            'instr'   => esc_html__('Select a link to a post archive.', 'field-factory'),
+            'label'   => $this->localize('field.archive.label'),
+            'name'    => $this->getName('archive'),
+            'instr'   => $this->localize('field.archive.instr'),
             'conds'   => $conds,
             'choices' => ['post', 'page'],
-        ];
-    }
-
-    /**
-     * Get external link url field.
-     *
-     * @return string[]
-     */
-    protected function getExternal()
-    {
-        $conds = new CondsList();
-        $conds->subjoin(new Cond($this->getTypeKey(), '==', 'external'));
-
-        return [
-            'key'   => $this->getKey('external'),
-            'label' => esc_html__('Link to page', 'field-factory'),
-            'name'  => $this->getName('external'),
-            'instr' => esc_html__('Add an external link. Must include http:// or https://.', 'field-factory'),
-            'conds' => $conds,
         ];
     }
 }
