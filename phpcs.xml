@@ -4,4 +4,12 @@
     <rule ref="PSR2"/>
     <arg name="report-width" value="100"/>
     <arg name="colors"/>
+    <rule ref="Squiz.Commenting.ClassComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment.TypeHintMissing">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing">
+        <severity>0</severity>
+    </rule>
 </ruleset>
