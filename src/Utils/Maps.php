@@ -10,9 +10,9 @@ class Maps
     /**
      * Get a value from a map.
      *
-     * @param string $key   Lookup key.
-     * @param string[] $map The map to look in.
-     * @param mixed $none   Optional empty value.
+     * @param string   $key  Lookup key.
+     * @param string[] $map  The map to look in.
+     * @param mixed    $none Optional empty value.
      *
      * @return mixed
      */
@@ -24,7 +24,7 @@ class Maps
     /**
      * Require that a map contains a given key.
      *
-     * @param string $key   Lookup key.
+     * @param string   $key Lookup key.
      * @param string[] $map The map to look in.
      *
      * @throws Exception If key is missing.
@@ -43,7 +43,7 @@ class Maps
     /**
      * Determine if a map entry is empty.
      *
-     * @param string $key   Lookup key.
+     * @param string   $key Lookup key.
      * @param string[] $map The map to look in.
      *
      * @return mixed
@@ -56,7 +56,7 @@ class Maps
     /**
      * Determine if a map entry is set and true.
      *
-     * @param string $key   Lookup key.
+     * @param string   $key Lookup key.
      * @param string[] $map The map to look in.
      *
      * @return boolean

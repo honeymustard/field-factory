@@ -14,7 +14,7 @@ class Translator
     /**
      * Contruct a new translator.
      *
-     * @param DictionaryInterface $dictionary
+     * @param DictionaryInterface $dictionary A dictionary instance.
      */
     public function __construct(DictionaryInterface $dictionary)
     {
@@ -24,9 +24,9 @@ class Translator
     /**
      * Replace an alias in a list.
      *
-     * @param string $alias  An alias.
-     * @param string $name   The translation name.
-     * @param string[] $args A list of arguments.
+     * @param string   $alias An alias.
+     * @param string   $name  The translation name.
+     * @param string[] $args  A list of arguments.
      *
      * @return string[] Translated list.
      */

@@ -167,7 +167,7 @@ class Factory
     /**
      * Get the field list length.
      *
-     * @return int
+     * @return integer
      */
     public function length()
     {
@@ -176,6 +176,8 @@ class Factory
 
     /**
      * Generate a new tab field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -187,6 +189,8 @@ class Factory
     /**
      * Generate a new message field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function message($args)
@@ -196,6 +200,8 @@ class Factory
 
     /**
      * Generate a new repeater field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -207,6 +213,8 @@ class Factory
     /**
      * Generate a new image field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function image($args)
@@ -216,6 +224,8 @@ class Factory
 
     /**
      * Generate a new text field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -227,6 +237,8 @@ class Factory
     /**
      * Generate a new textarea field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function textarea($args)
@@ -236,6 +248,8 @@ class Factory
 
     /**
      * Generate a new wysiwyg field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -247,6 +261,8 @@ class Factory
     /**
      * Generate a new radio buttons field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function radio($args)
@@ -256,6 +272,8 @@ class Factory
 
     /**
      * Generate a new url field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -267,6 +285,8 @@ class Factory
     /**
      * Generate a new post object field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function postObject($args)
@@ -276,6 +296,8 @@ class Factory
 
     /**
      * Generate a new select field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -287,6 +309,8 @@ class Factory
     /**
      * Generate a new checkbox field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function checkbox($args)
@@ -296,6 +320,8 @@ class Factory
 
     /**
      * Generate a new e-mail field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -307,6 +333,8 @@ class Factory
     /**
      * Generate a new flexible content field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function flexibleContent($args)
@@ -316,6 +344,8 @@ class Factory
 
     /**
      * Generate a new relationship field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -327,6 +357,8 @@ class Factory
     /**
      * Generate a new file field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function file($args)
@@ -336,6 +368,8 @@ class Factory
 
     /**
      * Generate a new oembed field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -347,6 +381,8 @@ class Factory
     /**
      * Generate a new boolean field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function trueFalse($args)
@@ -356,6 +392,8 @@ class Factory
 
     /**
      * Generate a new color picker field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -367,6 +405,8 @@ class Factory
     /**
      * Generate a new date & time picker field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function dateTimePicker($args)
@@ -376,6 +416,8 @@ class Factory
 
     /**
      * Generate a new user field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -387,6 +429,8 @@ class Factory
     /**
      * Generate a new number field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function number($args)
@@ -396,6 +440,8 @@ class Factory
 
     /**
      * Generate a new google map field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -407,6 +453,8 @@ class Factory
     /**
      * Generate a new password field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function password($args)
@@ -416,6 +464,8 @@ class Factory
 
     /**
      * Generate a new gallery field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -427,6 +477,8 @@ class Factory
     /**
      * Generate a new page link field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function pageLink($args)
@@ -436,6 +488,8 @@ class Factory
 
     /**
      * Generate a new taxonomy field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */
@@ -447,6 +501,8 @@ class Factory
     /**
      * Generate a new date picker field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function datePicker($args)
@@ -457,6 +513,8 @@ class Factory
     /**
      * Generate a new time picker field.
      *
+     * @param string[] $args A list of arguments.
+     *
      * @return Factory
      */
     public function timePicker($args)
@@ -466,6 +524,8 @@ class Factory
 
     /**
      * Generate a new clone field.
+     *
+     * @param string[] $args A list of arguments.
      *
      * @return Factory
      */

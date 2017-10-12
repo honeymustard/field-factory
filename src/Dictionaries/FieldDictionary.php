@@ -9,6 +9,11 @@ use Honeymustard\FieldFactory\Interfaces\DictionaryInterface;
  */
 class FieldDictionary implements DictionaryInterface
 {
+    /**
+     * Get dictionary values as a map.
+     *
+     * @return string[]
+     */
     public function getMap()
     {
         return [

@@ -13,8 +13,8 @@ final class Keymaker
     /**
      * Initiate new keys object.
      *
-     * @param $key  A suffix for field keys.
-     * @param $name A prefix for field names.
+     * @param string $key  A suffix for field keys.
+     * @param string $name A prefix for field names.
      */
     public function __construct($key, $name)
     {

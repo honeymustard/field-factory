@@ -16,8 +16,8 @@ class CommonLink implements AssemblyInterface
     /**
      * Construct a new CommonLink assembler.
      *
-     * @param string $name     The field name.
-     * @param string|int $type The ACF Field type.
+     * @param string         $name The field name.
+     * @param string|integer $type The ACF Field type.
      */
     public function __construct($name, $type = '')
     {
@@ -43,8 +43,8 @@ class CommonLink implements AssemblyInterface
     /**
      * Assemble and return field as a data object.
      *
-     * @param string $name     The field name.
-     * @param string|int $type The ACF Field type.
+     * @param string         $name The field name.
+     * @param string|integer $type The ACF Field type.
      *
      * @return StdClass
      */
@@ -127,7 +127,7 @@ class CommonLink implements AssemblyInterface
     /**
      * If link is an internal link.
      *
-     * @return bool
+     * @return boolean
      */
     public function isInternal()
     {
@@ -137,7 +137,7 @@ class CommonLink implements AssemblyInterface
     /**
      * If link is an external link.
      *
-     * @return bool
+     * @return boolean
      */
     public function isExternal()
     {
@@ -147,7 +147,7 @@ class CommonLink implements AssemblyInterface
     /**
      * If link is a document link.
      *
-     * @return bool
+     * @return boolean
      */
     public function isDocument()
     {
@@ -157,7 +157,7 @@ class CommonLink implements AssemblyInterface
     /**
      * If link is an archive link.
      *
-     * @return bool
+     * @return boolean
      */
     public function isArchive()
     {
@@ -167,7 +167,7 @@ class CommonLink implements AssemblyInterface
     /**
      * If link is an email link.
      *
-     * @return bool
+     * @return boolean
      */
     public function isEmail()
     {
@@ -263,7 +263,7 @@ class CommonLink implements AssemblyInterface
     /**
      * Get the internal value.
      *
-     * @return int
+     * @return integer
      */
     public function getInternal()
     {

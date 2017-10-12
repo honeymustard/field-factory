@@ -7,5 +7,10 @@ namespace Honeymustard\FieldFactory\Interfaces;
  */
 interface ArrayableInterface
 {
+    /**
+     * Convert object to an array.
+     *
+     * @return string[]
+     */
     public function toArray();
 }

@@ -10,17 +10,11 @@ class Repeater extends AbstractField
     /**
      * Construct new field.
      *
-     * @param string[] Field arguments.
+     * @param string[] $args Field arguments.
      */
     public function __construct($args)
     {
         parent::__construct('repeater', $args);
-
-        /*
-        if (is_object($field['sub_fields'])) {
-            throw new \Exception('Subfields must contain an array.');
-        }
-        */
     }
 
     /**

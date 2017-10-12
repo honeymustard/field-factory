@@ -106,7 +106,7 @@ abstract class AbstractLayout
     /**
      * Get the minimum number of layouts.
      *
-     * @return string|int
+     * @return string|integer
      */
     public function getMinLayouts()
     {
@@ -116,7 +116,7 @@ abstract class AbstractLayout
     /**
      * Get the maximum number of layouts.
      *
-     * @return string|int
+     * @return string|integer
      */
     public function getMaxLayouts()
     {

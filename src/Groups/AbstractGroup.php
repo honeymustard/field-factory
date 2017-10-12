@@ -101,7 +101,7 @@ abstract class AbstractGroup
     /**
      * Get the menu order.
      *
-     * @return int
+     * @return integer
      */
     public function getMenuOrder()
     {
@@ -151,7 +151,7 @@ abstract class AbstractGroup
     /**
      * Get the active value.
      *
-     * @return int
+     * @return integer
      */
     public function getActive()
     {

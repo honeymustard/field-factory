@@ -57,8 +57,8 @@ class CondsList extends AbstractList implements ArrayableInterface
     /**
      * Add a condition to one or all conditions.
      *
-     * @param AbstractCond $cond Condition to add.
-     * @param int $index         Conjoin at an optional index.
+     * @param AbstractCond $cond  Condition to add.
+     * @param integer      $index Conjoin at an optional index.
      *
      * @return CondsList
      */

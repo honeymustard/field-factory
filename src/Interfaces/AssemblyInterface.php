@@ -10,8 +10,8 @@ interface AssemblyInterface
     /**
      * Construct object and get the assembled data.
      *
-     * @param string $name     The field name.
-     * @param string|int $type The ACF Field type.
+     * @param string         $name The field name.
+     * @param string|integer $type The ACF Field type.
      *
      * @return StdClass
      */

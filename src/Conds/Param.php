@@ -8,9 +8,9 @@ namespace Honeymustard\FieldFactory\Conds;
 final class Param extends AbstractCond
 {
     /**
-     * Implements abstract method toArray.
+     * Convert object to an array.
      *
-     * @override
+     * @return string[]
      */
     public function toArray()
     {

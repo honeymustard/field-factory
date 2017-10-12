@@ -10,7 +10,7 @@ final class Converter
     /**
      * Recursively apply toArray on a list.
      *
-     * @param $list A list.
+     * @param string|object[] $list A list.
      *
      * @return string[]
      */

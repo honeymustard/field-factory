@@ -23,7 +23,7 @@ abstract class AbstractField implements FieldInterface, ArrayableInterface
     /**
      * Construct a new field.
      *
-     * @param string $type   The type of the field.
+     * @param string   $type The type of the field.
      * @param string[] $args A list of field arguments.
      */
     public function __construct($type, $args)

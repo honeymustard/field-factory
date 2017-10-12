@@ -10,7 +10,7 @@ class Number extends AbstractField
     /**
      * Construct new field.
      *
-     * @param string[] Field arguments.
+     * @param string[] $args Field arguments.
      */
     public function __construct($args)
     {

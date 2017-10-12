@@ -11,7 +11,7 @@ class Image
      * Get image from array.
      *
      * @param string[] $image Map of image data.
-     * @param string $size    Optional name of image size.
+     * @param string   $size  Optional name of image size.
      *
      * @return string the complete image url.
      */

@@ -13,7 +13,7 @@ abstract class AbstractList implements \Iterator
     /**
      * Get the length of the list.
      *
-     * @return int
+     * @return integer
      */
     public function length()
     {
@@ -43,7 +43,7 @@ abstract class AbstractList implements \Iterator
     /**
      * Get the current index.
      *
-     * @return int
+     * @return integer
      */
     public function key()
     {
@@ -73,9 +73,9 @@ abstract class AbstractList implements \Iterator
     /**
      * Append an item to the list.
      *
-     * @param mixed $item
+     * @param mixed $item An item to append.
      *
-     * @return boolean
+     * @return void
      */
     public function push($item)
     {
@@ -85,8 +85,8 @@ abstract class AbstractList implements \Iterator
     /**
      * Set an item at a given index.
      *
-     * @param mixed $item
-     * @param int $index
+     * @param mixed   $item  An item to be added.
+     * @param integer $index The index for the new item.
      *
      * @return void
      */
@@ -103,7 +103,7 @@ abstract class AbstractList implements \Iterator
     /**
      * Get an item at a given index.
      *
-     * @param int $index
+     * @param integer $index A valid list index.
      *
      * @return mixed
      */
@@ -120,7 +120,7 @@ abstract class AbstractList implements \Iterator
     /**
      * Determine if an index is valid.
      *
-     * @param int $index
+     * @param integer $index A list index.
      *
      * @return boolean
      */
