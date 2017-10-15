@@ -6,7 +6,7 @@ use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Translator;
 use Honeymustard\FieldFactory\Abilities\MergableTrait;
-use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
+use Honeymustard\FieldFactory\Dictionaries\GroupDictionary;
 
 /**
  * Base class for all groups.
@@ -26,7 +26,7 @@ abstract class AbstractGroup
     public function __construct($args)
     {
         $this->args = $args;
-        $this->translator = new Translator(new FieldDictionary());
+        $this->translator = new Translator(new GroupDictionary());
     }
 
     /**
@@ -73,18 +73,18 @@ abstract class AbstractGroup
     final protected function getDefaultArgs()
     {
         return [
-            'key'                   => '',
-            'title'                 => $this->getTitle(),
-            'fields'                => $this->getFactory(),
-            'location'              => $this->getLocations(),
-            'menu_order'            => $this->getMenuOrder(),
-            'position'              => $this->getPosition(),
-            'style'                 => $this->getStyle(),
-            'label_placement'       => $this->getLabelPlacement(),
-            'instruction_placement' => $this->getInstructionPlacement(),
-            'hide_on_screen'        => $this->getHideOnScreen(),
-            'active'                => $this->getActive(),
-            'description'           => $this->getDescription(),
+            'key'       => '',
+            'title'     => $this->getTitle(),
+            'fields'    => $this->getFactory(),
+            'location'  => $this->getLocations(),
+            'order'     => $this->getMenuOrder(),
+            'position'  => $this->getPosition(),
+            'style'     => $this->getStyle(),
+            'label_pos' => $this->getLabelPlacement(),
+            'instr_pos' => $this->getInstructionPlacement(),
+            'hide'      => $this->getHideOnScreen(),
+            'active'    => $this->getActive(),
+            'desc'      => $this->getDescription(),
         ];
     }
 

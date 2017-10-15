@@ -5,7 +5,7 @@ namespace Honeymustard\FieldFactory\Dictionaries;
 use Honeymustard\FieldFactory\Interfaces\DictionaryInterface;
 
 /**
- * Dictionary for translations between terms.
+ * Dictionary for translations of field terms.
  */
 class FieldDictionary implements DictionaryInterface
 {
