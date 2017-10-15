@@ -6,7 +6,7 @@ use Honeymustard\FieldFactory\Factory;
 use Honeymustard\FieldFactory\Utils\Maps;
 use Honeymustard\FieldFactory\Utils\Translator;
 use Honeymustard\FieldFactory\Abilities\MergableTrait;
-use Honeymustard\FieldFactory\Dictionaries\FieldDictionary;
+use Honeymustard\FieldFactory\Dictionaries\LayoutDictionary;
 
 /**
  * Base class for all layouts.
@@ -26,7 +26,7 @@ abstract class AbstractLayout
     public function __construct($args = [])
     {
         $this->args = $args;
-        $this->translator = new Translator(new FieldDictionary());
+        $this->translator = new Translator(new LayoutDictionary());
     }
 
     /**
@@ -38,8 +38,8 @@ abstract class AbstractLayout
     {
         return [
             'key'     => '',
-            'label'   => $this->getLabel(),
             'name'    => '',
+            'label'   => $this->getLabel(),
             'subs'    => $this->getFactory()->toArray(),
             'display' => $this->getDisplay(),
             'min'     => $this->getMinLayouts(),
