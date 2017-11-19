@@ -2,16 +2,16 @@
 
 namespace Honeymustard\FieldFactory\Assemblers;
 
+use Honeymustard\FieldFactory\Abilities\AssemblyTrait;
 use Honeymustard\FieldFactory\Interfaces\AssemblyInterface;
 use Honeymustard\FieldFactory\Utils\URL;
-use Honeymustard\FieldFactory\Utils\Maps;
 
 /**
  * Assembly class for the CommonLink field.
  */
 class CommonLink implements AssemblyInterface
 {
-    private $map = [];
+    use AssemblyTrait;
 
     /**
      * Construct a new CommonLink assembler.
@@ -21,30 +21,14 @@ class CommonLink implements AssemblyInterface
      */
     public function __construct($name, $type = '')
     {
-        $fields = $this->getFields();
-
-        foreach ($fields as $field) {
-            $lookup = $name.'_'.$field;
-
-            if ($type === 'option') {
-                $data = get_field($lookup, $type);
-            } elseif ($type === 'subs') {
-                $data = get_sub_field($lookup);
-            } elseif (is_numeric($type)) {
-                $data = get_field($lookup, intval($type));
-            } else {
-                $data = get_field($lookup);
-            }
-
-            $this->map[$field] = $data;
-        }
+        $this->parse($name, $type);
     }
 
     /**
      * Assemble and return field as a data object.
      *
      * @param string         $name The field name.
-     * @param string|integer $type The ACF Field type.
+     * @param string|integer $type The ACF field type.
      *
      * @return StdClass
      */
@@ -67,18 +51,6 @@ class CommonLink implements AssemblyInterface
         $data->anchor = $this->getAnchor();
 
         return $data;
-    }
-
-    /**
-     * Get a field value.
-     *
-     * @param string $name The field name.
-     *
-     * @return string
-     */
-    protected function getField($name)
-    {
-        return Maps::get($name, $this->map, '');
     }
 
     /**
